@@ -8,7 +8,7 @@ function Carousel() {
                     <div className="carousel-item active" data-bs-interval="10000">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require("./../../../images/books/1.png")} className="float-end" style={{width:'150px'}} />
+                                <img src={"./../../../images/books/1.png"} className="float-end" style={{width:'150px'}} />
                             </div>
                             <div className="col-7">
                                 <h5>First slide label</h5>
@@ -19,7 +19,7 @@ function Carousel() {
                     <div className="carousel-item " data-bs-interval="10000">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require("./../../../images/books/1.png")} className="float-end" style={{width:'150px'}} />
+                                <img src={"./../../../images/books/1.png"} className="float-end" style={{width:'150px'}} />
                             </div>
                             <div className="col-7">
                                 <h5>First slide label</h5>
@@ -30,7 +30,7 @@ function Carousel() {
                     <div className="carousel-item " data-bs-interval="10000">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require("./../../../images/books/1.png")} className="float-end" style={{width:'150px'}} />
+                                <img src={"./../../../images/books/1.png"} className="float-end" style={{width:'150px'}} />
                             </div>
                             <div className="col-7">
                                 <h5>First slide label</h5>

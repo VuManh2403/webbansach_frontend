@@ -10,7 +10,7 @@ const List: React.FC = () => {
             description: 'Description for Book 1',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: 'https://titv.vn/../images/books/1.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -18,7 +18,7 @@ const List: React.FC = () => {
             description: 'Description for Book 2',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/2.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -26,7 +26,7 @@ const List: React.FC = () => {
             description: 'Description for Book 3',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/3.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -34,7 +34,7 @@ const List: React.FC = () => {
             description: 'Description for Book 1',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/1.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -42,7 +42,7 @@ const List: React.FC = () => {
             description: 'Description for Book 2',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/2.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -50,7 +50,7 @@ const List: React.FC = () => {
             description: 'Description for Book 3',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/3.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -58,7 +58,7 @@ const List: React.FC = () => {
             description: 'Description for Book 1',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/1.png',
+            imageUrl: './../../images/books/1.png',
         },
         {
             id: 1,
@@ -66,7 +66,7 @@ const List: React.FC = () => {
             description: 'Description for Book 2',
             originalPrice: 50000,
             price: 45000,
-            imageUrl: './https://titv.vn/../images/books/2.png',
+            imageUrl: './../../images/books/1.png   ',
         },
 
     ];
@@ -74,6 +74,7 @@ const List: React.FC = () => {
         <div className="container">
             <div className="row mt-4">
                 {
+                    // vong lap den in ra
                     books.map((book) => (
                             <BookProps key={book.id}  book={book} />
                         )

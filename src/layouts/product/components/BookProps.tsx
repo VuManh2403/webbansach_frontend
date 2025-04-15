@@ -10,10 +10,10 @@ const BookProps: React.FC<BookProps> = ({ book }) => {
         <div className="col-md-3 mt-2">
             <div className="card">
                 <img
-                    src={book.imageUrl}
+                    src={ book.imageUrl}
                     className="card-img-top"
                     alt={book.title}
-                    style={{ height: '200px' }}
+                    style={{ height: '300px' }}
                 />
                 <div className="card-body">
                     <h5 className="card-title">{book.title}</h5>
@@ -22,9 +22,10 @@ const BookProps: React.FC<BookProps> = ({ book }) => {
                         <span className="original-price">
                             <del>{book.originalPrice}</del>
                         </span>
+                        <div>
                         <span className="discounted-price">
                             <strong>{book.price}</strong>
-                        </span>
+                        </span></div>
                     </div>
                     <div className="row mt-2" role="group">
                         <div className="col-6">
