@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import SachModel from "../../model/SachModel";
 import SachProps from "./components/SachProps";
 import {layToanBoSach} from "../../api/SachAPI";
+import { error } from "console";
+
 
 const DanhSachSanPham: React.FC = () => {
 

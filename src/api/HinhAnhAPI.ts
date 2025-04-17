@@ -2,13 +2,8 @@ import React from "react";
 import HinhAnhModel from "../model/HinhAnhModel";
 import {my_request} from "./Request";
 
-//Khi bạn dùng export async function trong JavaScript hoặc TypeScript, bạn đang vừa khai báo một hàm bất đồng bộ, vừa xuất (export) nó ra ngoài để các file/module khác có thể sử dụng.
-export async function layToanBoAnhCuaMotSach(maSach:number):Promise<HinhAnhModel[]> {
+async function layAnhCuaMotSach(duongDan: string):Promise<HinhAnhModel[]>{
     const ketQua:HinhAnhModel[] = [];
-
-    // xac dinh endpoint
-    const  duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
-
 
     // Gọi phương thức request
     const response = await my_request(duongDan);
@@ -27,4 +22,20 @@ export async function layToanBoAnhCuaMotSach(maSach:number):Promise<HinhAnhModel
         });
     }
     return ketQua;
+}
+
+//Khi bạn dùng export async function trong JavaScript hoặc TypeScript, bạn đang vừa khai báo một hàm bất đồng bộ, vừa xuất (export) nó ra ngoài để các file/module khác có thể sử dụng.
+export async function layToanBoAnhCuaMotSach(maSach:number):Promise<HinhAnhModel[]> {
+    // xac dinh endpoint
+    const  duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
+
+    return layAnhCuaMotSach(duongDan);
+}
+
+//Khi bạn dùng export async function trong JavaScript hoặc TypeScript, bạn đang vừa khai báo một hàm bất đồng bộ, vừa xuất (export) nó ra ngoài để các file/module khác có thể sử dụng.
+export async function lay1AnhCuaMotSach(maSach:number):Promise<HinhAnhModel[]> {
+    // xac dinh endpoint
+    const  duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh?sort=maHinhAnh,asc&page=0&size=1`;
+
+    return layAnhCuaMotSach(duongDan);
 }

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import SachModel from "../../../model/SachModel";
 import HinhAnhModel from "../../../model/HinhAnhModel";
 import {layToanBoAnhCuaMotSach} from "../../../api/HinhAnhAPI";
+import { error } from "console";
+
 
 interface SachPropsInterface{
     sach: SachModel;
