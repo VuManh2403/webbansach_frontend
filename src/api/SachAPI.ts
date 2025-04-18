@@ -2,9 +2,14 @@ import React from "react";
 import SachModel from "../model/SachModel";
 import {my_request} from "./Request";
 
-// tach duong dan ra -> duong dan thay doi thi ket qua lay dc se thay doi
+interface KetQuaInterface{
+    ketQua: SachModel[];
+    tongSoTrang: number;
+    tongSoSach: number;
+}
 
-async function laySach(duongDan: string):Promise<SachModel[]>{
+// tach duong dan ra -> duong dan thay doi thi ket qua lay dc se thay doi
+async function laySach(duongDan: string):Promise<KetQuaInterface>{
     const ketQua:SachModel[] = [];
 
     // Gọi phương thức request
@@ -13,6 +18,10 @@ async function laySach(duongDan: string):Promise<SachModel[]>{
     // Lấy ra json sach
     const responseData = response._embedded.saches;
     console.log(responseData);
+
+    // lay thong ti trang
+    const tongSoTrang:number = response.page.totalPages;
+    const tongSoSach:number = response.page.totalElements;
 
     for (const key in responseData) {
         ketQua.push({
@@ -26,19 +35,19 @@ async function laySach(duongDan: string):Promise<SachModel[]>{
             trungBinhXepHang: responseData[key].trungBinhXepHang
         });
     }
-    return ketQua;
+    return {ketQua: ketQua, tongSoTrang: tongSoTrang, tongSoSach: tongSoSach};
 }
 
 
 //Khi bạn dùng export async function trong JavaScript hoặc TypeScript, bạn đang vừa khai báo một hàm bất đồng bộ, vừa xuất (export) nó ra ngoài để các file/module khác có thể sử dụng.
-export async function layToanBoSach():Promise<SachModel[]> {
+export async function layToanBoSach(trang: number):Promise<KetQuaInterface> {
     // xac dinh endpoint
-    const  duongDan: string = "http://localhost:8080/sach?sort=maSach,desc";
+    const duongDan: string = `http://localhost:8080/sach?sort=maSach,desc&size=8&page=${trang}`;
     return laySach(duongDan);
 }
 
-export async function lay3SachMoiNhatSach():Promise<SachModel[]> {
+export async function lay3SachMoiNhatSach():Promise<KetQuaInterface> {
     // xac dinh endpoint
-    const  duongDan: string = "http://localhost:8080/sach?sort=maSach,desc&page=0&size=3";
+    const duongDan: string = 'http://localhost:8080/sach?sort=maSach,desc&page=0&size=3';
     return laySach(duongDan);
 }

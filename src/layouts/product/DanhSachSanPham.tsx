@@ -3,6 +3,7 @@ import SachModel from "../../model/SachModel";
 import SachProps from "./components/SachProps";
 import {layToanBoSach} from "../../api/SachAPI";
 import { error } from "console";
+import {PhanTrang} from "../Utils/PhanTrang";
 
 
 const DanhSachSanPham: React.FC = () => {
@@ -11,12 +12,18 @@ const DanhSachSanPham: React.FC = () => {
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
 
+    // phan trang
+    const [trangHienTai, setTrangHienTai] = useState(1);
+    const [tongSoTrang, setTongSoTrang] = useState(0);
+    const [tongSOSach, setTongSoSach] = useState(0);
+
     // lay du lieu
     useEffect(() => {
 
-            layToanBoSach().then(
-                sachData =>{
-                    setDanhSachQuyenSach(sachData);
+            layToanBoSach(trangHienTai-1).then(
+                kq =>{
+                    setDanhSachQuyenSach(kq.ketQua);
+                    setTongSoTrang(kq.tongSoTrang);
                     setDangTaiDuLieu(false);
                 }
             ).catch(
@@ -26,8 +33,12 @@ const DanhSachSanPham: React.FC = () => {
                 }
             );
 
-    },[] // chi goi 1 lan neu ko co luc nao cx truy van du lieu
+    },[trangHienTai] // chi goi 1 lan neu ko co luc nao cx truy van du lieu
     )
+
+    const phanTrang = (trang: number) => {
+        setTrangHienTai(trang);
+    };
 
     if(dangTaiDuLieu){
         return (
@@ -49,7 +60,7 @@ const DanhSachSanPham: React.FC = () => {
 
 
         <div className="container">
-            <div className="row mt-4">
+            <div className="row mt-4 mb-4">
                 {
                     danhSachQuyenSach.map((sach) => (
                             <SachProps key={sach.maSach} sach={sach} />
@@ -57,6 +68,7 @@ const DanhSachSanPham: React.FC = () => {
                     )
                 }
             </div>
+            <PhanTrang trangHienTai={trangHienTai} tongSoTrang={tongSoTrang} phanTrang={phanTrang}></PhanTrang>
         </div>
     );
 }
