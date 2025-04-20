@@ -51,3 +51,19 @@ export async function lay3SachMoiNhatSach():Promise<KetQuaInterface> {
     const duongDan: string = 'http://localhost:8080/sach?sort=maSach,desc&page=0&size=3';
     return laySach(duongDan);
 }
+
+//
+export async function timKiemSach(tuKhoaTimKiem: string): Promise<KetQuaInterface> {
+
+    // Xác định endpoint
+    // xac dinh trang tim kiem xong tra ve
+    // duong dan ban dau neu rong se tra ve
+    let duongDan: string = `http://localhost:8080/sach?sort=maSach,desc&size=8&page=0`;
+
+    if (tuKhoaTimKiem !== '') {
+        duongDan=`http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}`
+    }
+
+    return laySach(duongDan);
+
+}

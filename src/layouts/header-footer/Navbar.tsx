@@ -1,6 +1,23 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
-function Navbar() {
+interface NavbarProps {
+    tuKhoaTimKiem: string;
+    setTuKhoaTimKiem: (tuKhoa: string) => void;
+}
+
+function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
+    // thay vi sua luon tuKhoaTimKiem khi go vao o
+    // t tao bien tuKhoaTamThoi den khi nhan nut thi ms gan tuKhoaTimKiem = tuKhoaTamThoi
+    const [tuKhoaTamThoi, setTuKhoaTamThoi] = useState('');
+
+    const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>)=>{
+        setTuKhoaTamThoi(e.target.value);
+    }
+
+    const handleSearch= ()=>{
+        setTuKhoaTimKiem(tuKhoaTamThoi);
+    }
+
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-success">
             <div className="container-fluid">
@@ -41,10 +58,19 @@ function Navbar() {
                 </div>
 
                 {/* Tìm kiếm */}
-                <form className="d-flex">
-                    <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
-                    <button className="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div className="d-flex" >
+                    <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" onChange={onSearchInputChange} value={tuKhoaTamThoi} />
+                                {/* whiteSpace: 'nowrap': Ngăn chữ xuống dòng, px-3: Tạo padding ngang hợp lý,
+                                Tránh để button bị ép kích thước do container cha quá nhỏ */}
+                    <button
+                        className="btn btn-outline-light px-3"
+                        style={{ whiteSpace: 'nowrap' }}
+                        type="button"
+                        onClick={handleSearch}
+                    >
+                        Tìm kiếm
+                    </button>
+                </div>
 
                 {/* Biểu tượng giỏ hàng */}
                 <ul className="navbar-nav me-1">

@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import SachModel from "../../model/SachModel";
 import SachProps from "./components/SachProps";
-import {layToanBoSach} from "../../api/SachAPI";
+import {layToanBoSach, timKiemSach} from "../../api/SachAPI";
 import { error } from "console";
 import {PhanTrang} from "../Utils/PhanTrang";
 
+interface DanhSachSanPhamProps {
+    tuKhoaTimKiem: string;
+}
 
-const DanhSachSanPham: React.FC = () => {
+function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
 
     const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
@@ -19,9 +22,9 @@ const DanhSachSanPham: React.FC = () => {
 
     // lay du lieu
     useEffect(() => {
-
-            layToanBoSach(trangHienTai-1).then(
-                kq =>{
+        if (tuKhoaTimKiem === '') {
+            layToanBoSach(trangHienTai - 1).then(
+                kq => {
                     setDanhSachQuyenSach(kq.ketQua);
                     setTongSoTrang(kq.tongSoTrang);
                     setDangTaiDuLieu(false);
@@ -32,9 +35,22 @@ const DanhSachSanPham: React.FC = () => {
                     setBaoLoi(error.message);
                 }
             );
+        }else{
+            timKiemSach(tuKhoaTimKiem).then(
+                kq => {
+                    setDanhSachQuyenSach(kq.ketQua);
+                    setTongSoTrang(kq.tongSoTrang);
+                    setDangTaiDuLieu(false);
+                }
+            ).catch(
+                error => {
+                    setDangTaiDuLieu(false);
+                    setBaoLoi(error.message);
+                }
+            );
+        }
+    }, [trangHienTai, tuKhoaTimKiem]); // khi noi dung trong ngoac [] thay doi thi lam useEffect se thay doi
 
-    },[trangHienTai] // chi goi 1 lan neu ko co luc nao cx truy van du lieu
-    )
 
     const phanTrang = (trang: number) => {
         setTrangHienTai(trang);
@@ -52,6 +68,16 @@ const DanhSachSanPham: React.FC = () => {
         return(
             <div>
                 <h1>Gặp lỗi: {baoLoi}</h1>
+            </div>
+        );
+    }
+
+    if(danhSachQuyenSach.length===0){
+        return (
+            <div className="container">
+                <div className="d-flex align-items-center justify-content-center">
+                    <h1>Hiện không tìm thấy sách theo yêu cầu!</h1>
+                </div>
             </div>
         );
     }
