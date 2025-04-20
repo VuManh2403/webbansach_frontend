@@ -7,9 +7,10 @@ import {PhanTrang} from "../Utils/PhanTrang";
 
 interface DanhSachSanPhamProps {
     tuKhoaTimKiem: string;
+    maTheLoai: number;
 }
 
-function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
+function DanhSachSanPham({ tuKhoaTimKiem, maTheLoai }: DanhSachSanPhamProps) {
 
     const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
@@ -22,7 +23,7 @@ function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
 
     // lay du lieu
     useEffect(() => {
-        if (tuKhoaTimKiem === '') {
+        if (tuKhoaTimKiem === '' && maTheLoai==0) {
             layToanBoSach(trangHienTai - 1).then(
                 kq => {
                     setDanhSachQuyenSach(kq.ketQua);
@@ -36,7 +37,7 @@ function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
                 }
             );
         }else{
-            timKiemSach(tuKhoaTimKiem).then(
+            timKiemSach(tuKhoaTimKiem, maTheLoai).then(
                 kq => {
                     setDanhSachQuyenSach(kq.ketQua);
                     setTongSoTrang(kq.tongSoTrang);
@@ -49,7 +50,7 @@ function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
                 }
             );
         }
-    }, [trangHienTai, tuKhoaTimKiem]); // khi noi dung trong ngoac [] thay doi thi lam useEffect se thay doi
+    }, [trangHienTai, tuKhoaTimKiem, maTheLoai]); // khi noi dung trong ngoac [] thay doi thi lam useEffect se thay doi
 
 
     const phanTrang = (trang: number) => {

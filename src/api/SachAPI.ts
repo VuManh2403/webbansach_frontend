@@ -53,15 +53,17 @@ export async function lay3SachMoiNhatSach():Promise<KetQuaInterface> {
 }
 
 //
-export async function timKiemSach(tuKhoaTimKiem: string): Promise<KetQuaInterface> {
+export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Promise<KetQuaInterface> {
 
     // Xác định endpoint
-    // xac dinh trang tim kiem xong tra ve
-    // duong dan ban dau neu rong se tra ve
     let duongDan: string = `http://localhost:8080/sach?sort=maSach,desc&size=8&page=0`;
 
-    if (tuKhoaTimKiem !== '') {
+    if (tuKhoaTimKiem !== '' && maTheLoai==0) { // maTheLoai la so nen co the su dung ==
         duongDan=`http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}`
+    }else  if (tuKhoaTimKiem === '' && maTheLoai>0) {
+        duongDan=`http://localhost:8080/sach/search/findByDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&maTheLoai=${maTheLoai}`
+    }else  if (tuKhoaTimKiem !== '' && maTheLoai>0) {
+        duongDan=`http://localhost:8080/sach/search/findByTenSachContainingAndDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&maTheLoai=${maTheLoai}&tenSach=${tuKhoaTimKiem}`
     }
 
     return laySach(duongDan);
