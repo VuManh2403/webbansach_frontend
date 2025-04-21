@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 interface NavbarProps {
     tuKhoaTimKiem: string;
@@ -30,16 +30,16 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                            <NavLink className="nav-link active" aria-current="page" to="/">Trang chủ</NavLink>
                         </li>
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Thể loại sách
-                            </Link>
+                            </NavLink>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <li><Link className="dropdown-item" to="/1">Thể loại 1</Link></li>
-                                <li><Link className="dropdown-item" to="/2">Thể loại 2</Link></li>
-                                <li><Link className="dropdown-item" to="/3">Thể loại 3</Link></li>
+                                <li><NavLink className="dropdown-item" to="/1">Thể loại 1</NavLink></li>
+                                <li><NavLink className="dropdown-item" to="/2">Thể loại 2</NavLink></li>
+                                <li><NavLink className="dropdown-item" to="/3">Thể loại 3</NavLink></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown">

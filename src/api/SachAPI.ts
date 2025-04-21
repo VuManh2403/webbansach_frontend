@@ -17,7 +17,7 @@ async function laySach(duongDan: string):Promise<KetQuaInterface>{
 
     // Lấy ra json sach
     const responseData = response._embedded.saches;
-    console.log(responseData);
+    // console.log(responseData);
 
     // lay thong ti trang
     const tongSoTrang:number = response.page.totalPages;
@@ -68,4 +68,42 @@ export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Pro
 
     return laySach(duongDan);
 
+}
+
+export async function laySachTheoMaSach(maSach: number): Promise<SachModel|null> {
+
+    const duongDan = `http://localhost:8080/sach/${maSach}`;
+
+    let ketQua: SachModel;
+
+    try {
+        // Gọi phương thức request
+        // Gọi API (qua fetch) đến địa chỉ ví dụ như http://localhost:8080/sach/1
+        const response =  await fetch(duongDan);
+
+        if(!response.ok){
+            throw new Error('Gặp lỗi trong quá trình gọi API lấy sách!')
+        }
+
+        // Chuyển dữ liệu JSON đó thành kiểu SachModel
+        const sachData = await response.json();
+
+        if(sachData){
+            return {
+                maSach: sachData.maSach,
+                tenSach: sachData.tenSach,
+                giaBan: sachData.giaBan,
+                giaNiemYet: sachData.giaNiemYet,
+                moTa: sachData.moTa,
+                soLuong: sachData.soLuong,
+                tenTacGia: sachData.tenTacGia,
+                trungBinhXepHang: sachData.trungBinhXepHang
+            }
+        }else{
+            throw new Error('Sách không tồn tài!');
+        }
+    } catch (error) {
+        console.error("Error", error);
+        return null;
+    }
 }

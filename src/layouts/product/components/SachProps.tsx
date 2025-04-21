@@ -3,6 +3,7 @@ import SachModel from "../../../model/SachModel";
 import HinhAnhModel from "../../../model/HinhAnhModel";
 import {layToanBoAnhCuaMotSach} from "../../../api/HinhAnhAPI";
 import { error } from "console";
+import {Link} from "react-router-dom";
 
 
 interface SachPropsInterface{
@@ -60,15 +61,20 @@ const SachProps: React.FC<SachPropsInterface> = (props) => {
     return (
         <div className="col-md-3 mt-2">
             <div className="card">
+                <Link to={`/sach/${props.sach.maSach}`} >
                 <img
                     src={duLieuAnh}
                     className="card-img-top"
                     alt={props.sach.tenSach}
                     style={{ height: '300px' }}
                 />
+                </Link>
                 <div className="card-body">
+                    <Link to={`/sach/${props.sach.tenSach}`} style={{textDecoration: 'none'}}>
                     <h5 className="card-title">{props.sach.tenSach}</h5>
+                    </Link>
                     <p className="card-text">{props.sach.moTa}</p>
+
                     <div className="price">
                         <span className="original-price">
                             <del>{props.sach.giaNiemYet}</del>
