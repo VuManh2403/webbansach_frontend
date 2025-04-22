@@ -70,7 +70,7 @@ const SachProps: React.FC<SachPropsInterface> = (props) => {
                 />
                 </Link>
                 <div className="card-body">
-                    <Link to={`/sach/${props.sach.tenSach}`} style={{textDecoration: 'none'}}>
+                    <Link to={`/sach/${props.sach.maSach}`} style={{textDecoration: 'none'}}>
                     <h5 className="card-title">{props.sach.tenSach}</h5>
                     </Link>
                     <p className="card-text">{props.sach.moTa}</p>

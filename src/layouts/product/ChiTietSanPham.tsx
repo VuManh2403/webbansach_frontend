@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SachModel from "../../model/SachModel";
 import {laySachTheoMaSach} from "../../api/SachAPI";
+import HinhAnhSanPham from "../homepage/components/HinhAnhSanPham";
+import DanhGiaSanPham from "../homepage/components/DanhGiaSanPham";
 
 
 const ChiTietSanPham: React.FC = () => {

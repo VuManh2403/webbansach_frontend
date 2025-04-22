@@ -17,7 +17,7 @@ async function laySach(duongDan: string):Promise<KetQuaInterface>{
 
     // Lấy ra json sach
     const responseData = response._embedded.saches;
-    // console.log(responseData);
+    console.log(responseData);
 
     // lay thong ti trang
     const tongSoTrang:number = response.page.totalPages;
@@ -58,7 +58,7 @@ export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Pro
     // Xác định endpoint
     let duongDan: string = `http://localhost:8080/sach?sort=maSach,desc&size=8&page=0`;
 
-    if (tuKhoaTimKiem !== '' && maTheLoai==0) { // maTheLoai la so nen co the su dung ==
+    if (tuKhoaTimKiem !== '' && maTheLoai===0) { // maTheLoai la so nen co the su dung ==
         duongDan=`http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}`
     }else  if (tuKhoaTimKiem === '' && maTheLoai>0) {
         duongDan=`http://localhost:8080/sach/search/findByDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&maTheLoai=${maTheLoai}`
