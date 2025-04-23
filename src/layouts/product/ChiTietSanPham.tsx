@@ -4,7 +4,8 @@ import SachModel from "../../model/SachModel";
 import {laySachTheoMaSach} from "../../api/SachAPI";
 import HinhAnhSanPham from "../homepage/components/HinhAnhSanPham";
 import DanhGiaSanPham from "../homepage/components/DanhGiaSanPham";
-
+import renderRating from "../Utils/SaoXepHang";
+import dinhDangSo from "../Utils/DinhDangSo";
 
 const ChiTietSanPham: React.FC = () => {
     // Lấy mã sách từ URL
@@ -79,10 +80,10 @@ const ChiTietSanPham: React.FC = () => {
                                 {sach.tenSach}
                             </h1>
                             <h4>
-                                {sach.trungBinhXepHang}
+                                {renderRating(sach.trungBinhXepHang?sach.trungBinhXepHang:0)}
                             </h4>
                             <h4>
-                                {sach.giaBan}
+                                {dinhDangSo(sach.giaBan)} đ
                             </h4>
                             <hr/>
                             <div dangerouslySetInnerHTML={{__html: (sach.moTa+'')}}/>

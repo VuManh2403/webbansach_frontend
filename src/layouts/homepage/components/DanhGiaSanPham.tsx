@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DanhGiaModel from "../../../model/DanhGiaModel";
 import {layToanBoDanhGiaCuaMotSach} from "../../../api/DanhGiaAPI";
+import {Star, StarFill} from "react-bootstrap-icons";
+import renderRating from "../../Utils/SaoXepHang";
 
 interface DanhGiaSanPham {
     maSach: number;
@@ -49,6 +51,8 @@ const DanhGiaSanPham: React.FC<DanhGiaSanPham> = (props) => {
         );
     }
 
+
+
     return (
         <div className="container mt-2 mb-2 text-center">
             <h4>Đánh giá sản phẩm: </h4>
@@ -56,7 +60,7 @@ const DanhGiaSanPham: React.FC<DanhGiaSanPham> = (props) => {
                 danhSachDanhGia.map((danhGia, index) => (
                         <div className="row">
                             <div className="col-4  text-end">
-                                <p>Điểm xếp hạng: {danhGia.diemXepHang}</p>
+                                <p>Điểm xếp hạng: {renderRating(danhGia.diemXepHang)}</p>
                             </div>
                             <div className="col-8 text-start">
                                 <p>Đánh giá: {danhGia.nhanXet}</p>

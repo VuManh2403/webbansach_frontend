@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Link, NavLink} from "react-router-dom";
+import {Search} from "react-bootstrap-icons";
 
 interface NavbarProps {
     tuKhoaTimKiem: string;
@@ -65,11 +66,11 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                 Tránh để button bị ép kích thước do container cha quá nhỏ */}
                     <button
                         className="btn btn-outline-light px-3"
-                        style={{ whiteSpace: 'nowrap' }}
+                        style={{whiteSpace: 'nowrap'}}
                         type="button"
                         onClick={handleSearch}
                     >
-                        Tìm kiếm
+                        <Search ></Search>
                     </button>
                 </div>
 
