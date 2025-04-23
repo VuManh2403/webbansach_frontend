@@ -82,6 +82,9 @@ const ChiTietSanPham: React.FC = () => {
                             <h4>
                                 {renderRating(sach.trungBinhXepHang?sach.trungBinhXepHang:0)}
                             </h4>
+                            <del>
+                                {dinhDangSo(sach.giaNiemYet)} đ
+                            </del>
                             <h4>
                                 {dinhDangSo(sach.giaBan)} đ
                             </h4>
