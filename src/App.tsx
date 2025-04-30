@@ -8,6 +8,9 @@ import About from "./layouts/about/About";
 import ChiTietSanPham from "./layouts/product/ChiTietSanPham";
 import DangKyNguoiDung from "./layouts/user/DangKyNguoiDung";
 import KichHoatTaiKhoan from "./layouts/user/KichHoatTaiKhoan";
+import DangNhap from "./layouts/user/DangNhap";
+import Test from "./layouts/user/Test";
+import SachForm from "./layouts/admin/SachForm";
 
 function App() {
     // dung useState de tao ra bien
@@ -25,6 +28,9 @@ function App() {
                     <Route path='/sach/:maSach' element={<ChiTietSanPham />} />
                     <Route path='/dangKy' element={<DangKyNguoiDung />}></Route>
                     <Route path='/kich-hoat/:email/:maKichHoat' element={<KichHoatTaiKhoan/>} />
+                    <Route path='/dang-nhap' element={<DangNhap />} />
+                    <Route path='/test' element={<Test />} />
+                    <Route path='/admin/them-sach' element={<SachForm />} />
                 </Routes>
                 <Footer/>
             </BrowserRouter>
