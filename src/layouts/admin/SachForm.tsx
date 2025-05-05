@@ -1,7 +1,8 @@
 import React, { FormEvent, useState } from 'react';
+import RequireAdmin from './RequireAdmin';
 
 
-const SachForm: React.FC = () => {
+const SachForm: React.FC = (props) => {
     const [sach, setSach] = useState({
         maSach: 0,
         tenSach: '',
@@ -10,7 +11,6 @@ const SachForm: React.FC = () => {
         moTa: '',
         soLuong: 0,
         tenTacGia: '',
-        isbn: '',
         trungBinhXepHang: 0,
     })
 
@@ -37,8 +37,7 @@ const SachForm: React.FC = () => {
                     moTa: '',
                     soLuong: 0,
                     tenTacGia: '',
-                    isbn: '',
-                    trungBinhXepHang: 0,
+                    trungBinhXepHang: 0
                 })
             }else{
                 alert("Gặp lỗi trong quá trình thêm sách!");
@@ -111,14 +110,6 @@ const SachForm: React.FC = () => {
                         required
                     />
 
-                    <label htmlFor='isbn'>ISBN</label>
-                    <input
-                        className='form-control'
-                        type='isbn'
-                        value={sach.isbn}
-                        onChange={(e) => setSach({ ...sach, isbn: e.target.value })}
-                        required
-                    />
 
                     <button type='submit' className='btn btn-success mt-2'>Lưu</button>
                 </form>
@@ -127,4 +118,5 @@ const SachForm: React.FC = () => {
     )
 }
 
-export default SachForm;
+const SachForm_Admin = RequireAdmin(SachForm);
+export default SachForm_Admin;
