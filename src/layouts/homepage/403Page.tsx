@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {Button} from "@mui/material";
 import useScrollToTop from "../../hooks/ScrollToTop";
+
 
 export const Error403Page: React.FC = () => {
 	useScrollToTop(); // Mỗi lần vào component này thì sẽ ở trên cùng

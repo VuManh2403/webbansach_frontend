@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DanhGiaModel from "../../../model/DanhGiaModel";
 import {layToanBoDanhGiaCuaMotSach} from "../../../api/DanhGiaAPI";
 import {Star, StarFill} from "react-bootstrap-icons";
-import renderRating from "../../Utils/SaoXepHang";
+import renderRating from "../../utils/SaoXepHang";
 
 interface DanhGiaSanPham {
     maSach: number;

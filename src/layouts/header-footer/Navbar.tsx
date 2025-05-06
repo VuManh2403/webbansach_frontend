@@ -1,6 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Link, NavLink} from "react-router-dom";
 import {Search} from "react-bootstrap-icons";
+import {dangXuat, getAvatarByToken, getQuyenByToken, getTenByToken, kiemTraToken} from "../utils/JwtService";
+import { Avatar } from "@mui/material";
+import { Dropdown } from 'react-bootstrap';
+
 
 interface NavbarProps {
     tuKhoaTimKiem: string;
@@ -21,9 +25,9 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
     }
 
     return(
-        <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Bookstore</a>
+                <Link className="navbar-brand" to="/">Bookstore</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -32,6 +36,12 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <NavLink className="nav-link active" aria-current="page" to="/">Trang chủ</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link active" aria-current="page" to="/">Giới thiệu</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link active" aria-current="page" to="/">Tủ sách</NavLink>
                         </li>
                         <li className="nav-item dropdown">
                             <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,19 +53,10 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                 <li><NavLink className="dropdown-item" to="/3">Thể loại 3</NavLink></li>
                             </ul>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Quy định bán hàng
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                <li><a className="dropdown-item" href="#">Quy định 1</a></li>
-                                <li><a className="dropdown-item" href="#">Quy định 2</a></li>
-                                <li><a className="dropdown-item" href="#">Quy định 3</a></li>
-                            </ul>
-                        </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Liên hệ</a>
+                            <NavLink className="nav-link active" aria-current="page" to="/">Chính sách</NavLink>
                         </li>
+
                     </ul>
                 </div>
 
@@ -84,13 +85,71 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                 </ul>
 
                 {/* Biểu tượng đăng nhập */}
-                <ul className="navbar-nav me-1">
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">
-                            <i className="fas fa-user"></i>
-                        </a>
-                    </li>
-                </ul>
+                {!kiemTraToken() && (
+                    <div>
+                        <ul className="navbar-nav me-1">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/dang-nhap">
+                                    <i className="fas fa-user"></i>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+                {kiemTraToken() && (
+                    <>
+                        {/* <!-- Notifications --> */}
+                        <Dropdown>
+                            <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                                <i className="fas fa-bell"></i>
+                                <span className="badge rounded-pill bg-danger text-white">1</span>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="#">Some news</Dropdown.Item>
+                                <Dropdown.Item href="#">Another news</Dropdown.Item>
+                                <Dropdown.Item href="#">Something else here</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        {/* <!-- Avatar --> */}
+                        <Dropdown align="end">
+                            <Dropdown.Toggle
+                                variant="link"
+                                id="navbarDropdownMenuAvatar"
+                                className="d-flex align-items-center hidden-arrow"
+                                style={{ padding: 0 }}>
+                                <Avatar
+                                    style={{ fontSize: "14px" }}
+                                    alt={getTenByToken()?.toUpperCase()}
+                                    src={getAvatarByToken()}
+                                    sx={{ width: 30, height: 30 }}
+                                />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item as={Link} to="/profile">
+                                    Thông tin cá nhân
+                                </Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/my-favorite-books">
+                                    Sách yêu thích của tôi
+                                </Dropdown.Item>
+                                {getQuyenByToken() === "ADMIN" && (
+                                    <Dropdown.Item as={Link} to="/admin">
+                                        Quản lý
+                                    </Dropdown.Item>
+                                )}
+                                <Dropdown.Item onClick={() => {
+                                    // setTotalCart(0);
+                                    // logout(navigate);
+                                    // setLoggedIn(false);
+                                    // setCartList([]);
+                                }} style={{ cursor: "pointer" }}>
+                                    Đăng xuất
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </>
+                )}
             </div>
         </nav>
     );

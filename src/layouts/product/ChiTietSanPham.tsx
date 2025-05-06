@@ -4,8 +4,8 @@ import SachModel from "../../model/SachModel";
 import {laySachTheoMaSach} from "../../api/SachAPI";
 import HinhAnhSanPham from "../homepage/components/HinhAnhSanPham";
 import DanhGiaSanPham from "../homepage/components/DanhGiaSanPham";
-import renderRating from "../Utils/SaoXepHang";
-import dinhDangSo from "../Utils/DinhDangSo";
+import renderRating from "../utils/SaoXepHang";
+import dinhDangSo from "../utils/DinhDangSo";
 
 const ChiTietSanPham: React.FC = () => {
     // Lấy mã sách từ URL

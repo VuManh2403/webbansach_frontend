@@ -4,8 +4,8 @@ import HinhAnhModel from "../../../model/HinhAnhModel";
 import {layToanBoAnhCuaMotSach} from "../../../api/HinhAnhAPI";
 import { error } from "console";
 import {Link} from "react-router-dom";
-import renderRating from "../../Utils/SaoXepHang";
-import dinhDangSo from "../../Utils/DinhDangSo";
+import renderRating from "../../utils/SaoXepHang";
+import dinhDangSo from "../../utils/DinhDangSo";
 
 
 interface SachPropsInterface{

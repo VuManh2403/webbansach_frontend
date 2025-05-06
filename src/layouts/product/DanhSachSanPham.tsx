@@ -3,7 +3,7 @@ import SachModel from "../../model/SachModel";
 import SachProps from "./components/SachProps";
 import {layToanBoSach, timKiemSach} from "../../api/SachAPI";
 import { error } from "console";
-import {PhanTrang} from "../Utils/PhanTrang";
+import {PhanTrang} from "../utils/PhanTrang";
 
 interface DanhSachSanPhamProps {
     tuKhoaTimKiem: string;
