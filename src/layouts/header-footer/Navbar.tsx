@@ -38,7 +38,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                             <NavLink className="nav-link active" aria-current="page" to="/">Trang chủ</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link active" aria-current="page" to="/">Giới thiệu</NavLink>
+                            <NavLink className="nav-link active" aria-current="page" to="/gioi-thieu">Giới thiệu</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link active" aria-current="page" to="/">Tủ sách</NavLink>
@@ -54,7 +54,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link active" aria-current="page" to="/">Chính sách</NavLink>
+                            <NavLink className="nav-link active" aria-current="page" to="/chinh-sach">Chính sách</NavLink>
                         </li>
 
                     </ul>
