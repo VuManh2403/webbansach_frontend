@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {Search} from "react-bootstrap-icons";
 import {dangXuat, getAvatarByToken, getQuyenByToken, getTenByToken, kiemTraToken} from "../utils/JwtService";
 import { Avatar } from "@mui/material";
@@ -16,6 +16,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
     // t tao bien tuKhoaTamThoi den khi nhan nut thi ms gan tuKhoaTimKiem = tuKhoaTamThoi
     const [tuKhoaTamThoi, setTuKhoaTamThoi] = useState('');
 
+    const navigate = useNavigate();
     const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>)=>{
         setTuKhoaTamThoi(e.target.value);
     }
@@ -25,7 +26,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
     }
 
     return(
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-secondary">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">Bookstore</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,7 +101,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                     <>
                         {/* <!-- Notifications --> */}
                         <Dropdown>
-                            <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                                 <i className="fas fa-bell"></i>
                                 <span className="badge rounded-pill bg-danger text-white">1</span>
                             </Dropdown.Toggle>
@@ -140,7 +141,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                 )}
                                 <Dropdown.Item onClick={() => {
                                     // setTotalCart(0);
-                                    // logout(navigate);
+                                    dangXuat(navigate);
                                     // setLoggedIn(false);
                                     // setCartList([]);
                                 }} style={{ cursor: "pointer" }}>

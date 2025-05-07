@@ -1,66 +1,226 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 function Footer() {
     return (
-        <div className="container">
-            <footer className="py-5">
-                <div className="row">
-                    <div className="col-6 col-md-2 mb-3">
-                        <h5>Section</h5>
-                        <ul className="nav flex-column">
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Features</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Pricing</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">About</a></li>
-                        </ul>
-                    </div>
+        // <!-- Footer -->
+        <footer className='bg-secondary text-center text-white'>
+            {/* <!-- Grid container --> */}
+            <div className='container p-4'>
+                {/* <!-- Section: Social media --> */}
+                <section className='mb-4'>
+                    {/* <!-- Facebook --> */}
+                    <a
+                        className='btn btn-outline-light btn-floating m-1'
+                        href='#!'
+                        role='button'
+                    >
+                        <i className='fab fa-facebook-f'></i>
+                    </a>
 
-                    <div className="col-6 col-md-2 mb-3">
-                        <h5>Section</h5>
-                        <ul className="nav flex-column">
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Features</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Pricing</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">About</a></li>
-                        </ul>
-                    </div>
+                    {/* <!-- Twitter --> */}
+                    <a
+                        className='btn btn-outline-light btn-floating m-1'
+                        href='#!'
+                        role='button'
+                    >
+                        <i className='fab fa-twitter'></i>
+                    </a>
 
-                    <div className="col-6 col-md-2 mb-3">
-                        <h5>Section</h5>
-                        <ul className="nav flex-column">
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Features</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">Pricing</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">About</a></li>
-                        </ul>
-                    </div>
+                    {/* <!-- Google --> */}
+                    <a
+                        className='btn btn-outline-light btn-floating m-1'
+                        href='#!'
+                        role='button'
+                    >
+                        <i className='fab fa-google'></i>
+                    </a>
 
-                    <div className="col-md-5 offset-md-1 mb-3">
-                        <form>
-                            <h5>Subscribe to our newsletter</h5>
-                            <p>Monthly digest of what's new and exciting from us.</p>
-                            <div className="d-flex flex-column flex-sm-row w-100 gap-2">
-                                <label  className="visually-hidden">Email address</label>
-                                <input id="newsletter1" type="text" className="form-control" placeholder="Email address"/>
-                                <button className="btn btn-primary" type="button">Subscribe</button>
+                    {/* <!-- Instagram --> */}
+                    <a
+                        className='btn btn-outline-light btn-floating m-1'
+                        href='#!'
+                        role='button'
+                    >
+                        <i className='fab fa-instagram'></i>
+                    </a>
+
+                    {/* <!-- Linkedin --> */}
+                    <a
+                        className='btn btn-outline-light btn-floating m-1'
+                        href='#!'
+                        role='button'
+                    >
+                        <i className='fab fa-linkedin-in'></i>
+                    </a>
+
+                    {/* <!-- Github --> */}
+                    <a
+                        className='btn btn-outline-light btn-floating m-1'
+                        href='#!'
+                        role='button'
+                    >
+                        <i className='fab fa-github'></i>
+                    </a>
+                </section>
+                {/* <!-- Section: Social media --> */}
+
+                {/* <!-- Section: Form --> */}
+                <section className=''>
+                    <form action=''>
+                        {/* <!--Grid row--> */}
+                        <div className='row d-flex justify-content-center'>
+                            <div className='col-auto'>
+                                <p className='pt-2'>
+                                    <strong>Đăng ký nhận bản tin</strong>
+                                </p>
                             </div>
-                        </form>
-                    </div>
-                </div>
 
-                <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                    <p>&copy; 2023 Company, Inc. All rights reserved.</p>
-                    <ul className="list-unstyled d-flex">
-                        <li className="ms-3"><a className="link-body-emphasis" href="#"> <i className="fas fa-tweeter"></i></a></li>
-                        <li className="ms-3"><a className="link-body-emphasis" href="#"> <i className="fas fa-instagram"></i></a></li>
-                        <li className="ms-3"><a className="link-body-emphasis" href="#"> <i className="fas fa-facebook"></i></a></li>
-                    </ul>
-                </div>
-            </footer>
-        </div>
+                            <div className='col-md-5 col-12'>
+                                {/* <!-- Email input --> */}
+                                <div className=' form-white mb-4'>
+                                    <input
+                                        type='email'
+                                        id='form5Example21'
+                                        className='form-control'
+                                        placeholder='Nhập Email'
+                                    />
+                                </div>
+                            </div>
+
+                            <div className='col-auto'>
+                                {/* <!-- Submit button --> */}
+                                <button
+                                    type='button'
+                                    className='btn btn-outline-light mb-4'
+                                >
+                                    Đăng ký
+                                </button>
+                            </div>
+                        </div>
+                        {/* <!--Grid row--> */}
+                    </form>
+                </section>
+                {/* <!-- Section: Form --> */}
+
+                {/* <!-- Section: Links --> */}
+                <section className=''>
+                    {/* <!--Grid row--> */}
+                    <div className='row'>
+                        <div className='col-lg-6 col-md-12'>
+                            <div className='row'>
+                                <div className='col-lg-4 col-md-12 mb-4'>
+                                    <h5 className='text-uppercase'>DỊCH VỤ</h5>
+
+                                    <ul className='list-unstyled mb-0'>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Điều khoản sử dụng
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chính sách bảo mật thông tin cá nhân
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chính sách bảo mật thanh toán
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Hệ thống trung tâm - nhà sách
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div className='col-lg-4 col-md-12 mb-4'>
+                                    <h5 className='text-uppercase'>HỖ TRỢ</h5>
+
+                                    <ul className='list-unstyled mb-0'>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chính sách đổi - trả - hoàn tiền
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chính sách bảo hành - bồi hoàn
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chính sách vận chuyển
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chính sách khách sỉ
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div className='col-lg-4 col-md-12 mb-4'>
+                                    <h5 className='text-uppercase'>TÀI KHOẢN CỦA TÔI</h5>
+
+                                    <ul className='list-unstyled mb-0'>
+                                        <li>
+                                            <Link to={"/dang-nhap"} className='text-white'>
+                                                Đăng nhập/Tạo mới tài khoản
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Thay đổi địa chỉ khách hàng
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Chi tiết tài khoản
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href='#!' className='text-white'>
+                                                Lịch sử mua hàng
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-lg-6 col-md-12'>
+                            <iframe
+                                title='map'
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.6619654527212!2d105.84055577503081!3d21.006183180637493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac71294bf0ab%3A0xc7e2d20e5e04a9da!2zxJDhuqFpIEjhu41jIELDoWNoIEtob2EgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1746062304720!5m2!1svi!2s"
+                                width='500'
+                                height='200'
+                                style={{border: 0}}
+                                loading='lazy'
+                                referrerPolicy='no-referrer-when-downgrade'
+                            ></iframe>
+                        </div>
+                    </div>
+                    {/* <!--Grid row--> */}
+                </section>
+                {/* <!-- Section: Links --> */}
+            </div>
+            {/* <!-- Grid container --> */}
+
+            {/* <!-- Copyright --> */}
+            <div
+                className='text-center p-3'
+                style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}
+            >
+                © 2025 Copyright
+                <span className='text-white text-decoration-underline'>
+					{" "}
+				</span>
+            </div>
+            {/* <!-- Copyright --> */}
+        </footer>
     );
 }
 

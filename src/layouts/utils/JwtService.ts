@@ -62,7 +62,7 @@ export function getQuyenByToken() {
 }
 
 export function dangXuat(navigate: any) {
-    navigate("/dang-xuat");
+    navigate("/dang-nhap");
     localStorage.removeItem('token');
     localStorage.removeItem('cart');
 }
