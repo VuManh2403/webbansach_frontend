@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {endpointBE} from "../utils/Constant";
+import {Link} from "react-router-dom";
 
 function DangKyNguoiDung() {
 
@@ -41,7 +43,7 @@ function DangKyNguoiDung() {
         // Kiểm tra tất cả các điều kiện
         if (isTenDangNhapValid && isEmailValid && isMatKhauValid && isMatKhauLapLaiValid && isSoDienThoaiValid ) {
             try {
-                const url = 'http://localhost:8080/tai-khoan/dang-ky';
+                const url = endpointBE+'/tai-khoan/dang-ky';
 
                 const response = await fetch(url, {
                         method: 'POST',
@@ -76,7 +78,7 @@ function DangKyNguoiDung() {
     // KIỂM TRA TÊN ĐĂNG NHẬP
     const kiemTraTenDangNhapDaTonTai = async (tenDangNhap: string) => {
         // end-point
-        const url = `http://localhost:8080/nguoi-dung/search/existsByTenDangNhap?tenDangNhap=${tenDangNhap}`;
+        const url = endpointBE+ `/nguoi-dung/search/existsByTenDangNhap?tenDangNhap=${tenDangNhap}`;
         console.log(url);
         // call api
         try {
@@ -106,7 +108,7 @@ function DangKyNguoiDung() {
     // KIỂM TRA EMAIL
     const kiemTraEmailDaTonTai = async (email: string) => {
         // end-point
-        const url = `http://localhost:8080/nguoi-dung/search/existsByEmail?email=${email}`;
+        const url = endpointBE+ `/nguoi-dung/search/existsByEmail?email=${email}`;
         console.log(url);
         // call api
         try {
@@ -304,7 +306,11 @@ function DangKyNguoiDung() {
                             onChange={(e) => setGioiTinh(e.target.value)}
                         />
                     </div>
-
+                    <div className='d-flex justify-content-end mt-2 px-3'>
+					<span>
+						Bạn có tài khoản rồi? <Link to={"/dang-nhap"}>Đăng nhập</Link>
+					</span>
+                    </div>
                     {/* Nút submit */}
                     <div className="text-center">
                         <button type="submit" className="btn btn-primary px-5">Đăng ký</button>

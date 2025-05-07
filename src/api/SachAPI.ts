@@ -1,6 +1,7 @@
 import React from "react";
 import SachModel from "../model/SachModel";
 import {my_request} from "./Request";
+import {layToanBoAnhCuaMotSach} from "./HinhAnhAPI";
 
 interface KetQuaInterface{
     ketQua: SachModel[];
@@ -17,24 +18,28 @@ async function laySach(duongDan: string):Promise<KetQuaInterface>{
 
     // Lấy ra json sach
     const responseData = response._embedded.saches;
-    console.log(responseData);
+
 
     // lay thong ti trang
     const tongSoTrang:number = response.page.totalPages;
     const tongSoSach:number = response.page.totalElements;
 
-    for (const key in responseData) {
-        ketQua.push({
-            maSach: responseData[key].maSach,
-            tenSach: responseData[key].tenSach,
-            giaBan: responseData[key].giaBan,
-            giaNiemYet: responseData[key].giaNiemYet,
-            moTa: responseData[key].moTa,
-            soLuong: responseData[key].soLuong,
-            tenTacGia: responseData[key].tenTacGia,
-            trungBinhXepHang: responseData[key].trungBinhXepHang
-        });
-    }
+    // Lấy ra danh sách quyển sách
+    const bookList: SachModel[] = response._embedded.books.map((bookData: SachModel) => ({
+        ...bookData,
+    }))
+
+    // Lấy ra ảnh của từng quyển sách
+    const bookList1 = await Promise.all(
+        bookList.map(async (book: SachModel) => {
+            const responseImg = await layToanBoAnhCuaMotSach(book.maSach);
+            const thumbnail = responseImg.filter(image => image.thumbnail);
+            return {
+                ...book,
+                thumbnail: thumbnail[0].duongDan,
+            };
+        })
+    );
     return {ketQua: ketQua, tongSoTrang: tongSoTrang, tongSoSach: tongSoSach};
 }
 
@@ -70,6 +75,7 @@ export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Pro
 
 }
 
+// Lấy sách theo id (chỉ lấy thumbnail)
 export async function laySachTheoMaSach(maSach: number): Promise<SachModel|null> {
 
     const duongDan = `http://localhost:8080/sach/${maSach}`;

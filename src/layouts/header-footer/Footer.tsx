@@ -3,8 +3,9 @@ import {Link} from "react-router-dom";
 
 function Footer() {
     return (
+
         // <!-- Footer -->
-        <footer className='bg-secondary text-center text-white'>
+        <footer className='bg-secondary text-center text-white mt-4' >
             {/* <!-- Grid container --> */}
             <div className='container p-4'>
                 {/* <!-- Section: Social media --> */}

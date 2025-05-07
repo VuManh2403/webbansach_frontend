@@ -1,16 +1,15 @@
 class DanhGiaModel {
     maDanhGia: number;
-    diemXepHang: number;
     nhanXet: string;
+    diemXepHang: number;
+    thoiGianDanhGia?: string;
 
-    constructor(
-        maDanhGia: number,
-        diemXepHang: number,
-        nhanXet: string,
-    ) {
+
+    constructor(maDanhGia: number, nhanXet: string, diemXepHang: number, thoiGianDanhGia: string) {
         this.maDanhGia = maDanhGia;
-        this.diemXepHang = diemXepHang;
         this.nhanXet = nhanXet;
+        this.diemXepHang = diemXepHang;
+        this.thoiGianDanhGia = thoiGianDanhGia;
     }
 }
 

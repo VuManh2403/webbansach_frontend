@@ -1,15 +1,15 @@
 class HinhAnhModel {
     maHinhAnh: number;
     tenHinhAnh?: string;
-    laIcon?: boolean;
+    thumbnail?: boolean;
     duongDan?: string;
     duLieuAnh?: string;
 
 
-    constructor(maHinhAnh: number, tenHinhAnh?: string, laIcon?: boolean, duongDan?: string, duLieuAnh?: string) {
+    constructor(maHinhAnh: number, tenHinhAnh?: string, thumbnail?: boolean, duongDan?: string, duLieuAnh?: string) {
         this.maHinhAnh = maHinhAnh;
         this.tenHinhAnh = tenHinhAnh;
-        this.laIcon = laIcon;
+        this.thumbnail = thumbnail;
         this.duongDan = duongDan;
         this.duLieuAnh = duLieuAnh;
     }
