@@ -13,11 +13,11 @@ class SachModel {
     giamGia?:number;
     thumbnail?: string;
     danhSachAnh?: string[];
-    maTheLoai?:number;
+    maTheLoai?:number[];
     danhSachTheLoai?:TheLoaiModel[];
 
 
-    constructor(maSach: number, tenSach: string, giaBan: number, giaNiemYet: number, moTa: string, soLuong: number, tenTacGia: string, trungBinhXepHang: number, soLuongBan: number, giamGia: number, thumbnail: string, danhSachAnh: string[], maTheLoai: number, danhSachTheLoai: TheLoaiModel[]) {
+    constructor(maSach: number, tenSach: string, giaBan: number, giaNiemYet: number, moTa: string, soLuong: number, tenTacGia: string, trungBinhXepHang: number, soLuongBan: number, giamGia: number, thumbnail: string, danhSachAnh: string[], maTheLoai: number[], danhSachTheLoai: TheLoaiModel[]) {
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.giaBan = giaBan;

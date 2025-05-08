@@ -2,25 +2,13 @@ import React from "react";
 import { my_request } from "./Request";
 import DanhGiaModel from "../model/DanhGiaModel";
 
-async function layDanhGiaCuaMotSach(duongDan: string): Promise<DanhGiaModel[]> {
-    const ketQua: DanhGiaModel[] = [];
+async function layDanhGiaCuaMotSach(endpoint: string): Promise<DanhGiaModel[]> {
+    // Gọi phương thức request()
+    const response = await my_request(endpoint);
 
-    // Gọi phương thức request
-    const response = await my_request(duongDan);
-
-    // Lấy ra json sach
-    const responseData = response._embedded.suDanhGias;
-    // console.log(responseData);
-
-    for (const key in responseData) {
-        ketQua.push({
-            maDanhGia: responseData[key].maDanhGia,
-            diemXepHang: responseData[key].diemXepHang,
-            nhanXet: responseData[key].nhanXet,
-        });
-    }
-
-    return ketQua;
+    return response._embedded.reviews.map((reviewData: any) => ({
+        ...reviewData,
+    }));
 }
 
 
