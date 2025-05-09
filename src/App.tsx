@@ -10,7 +10,7 @@ import DangKyNguoiDung from "./layouts/user/DangKyNguoiDung";
 import KichHoatTaiKhoan from "./layouts/user/KichHoatTaiKhoan";
 import DangNhap from "./layouts/user/DangNhap";
 import Test from "./layouts/user/Test";
-import SachForm from "./layouts/admin/SachForm";
+import SachForm from "./layouts/admin/Sach/SachForm";
 import {Error403Page} from "./layouts/homepage/403Page";
 import {Error404Page} from "./layouts/homepage/404Page";
 import ChinhSach from "./layouts/homepage/ChinhSach";
@@ -34,7 +34,6 @@ function App() {
                     <Route path='/kich-hoat/:email/:maKichHoat' element={<KichHoatTaiKhoan/>} />
                     <Route path='/dang-nhap' element={<DangNhap />} />
                     <Route path='/test' element={<Test />} />
-                    <Route path='/admin/them-sach' element={<SachForm />} />
                     <Route path='/bao-loi-403' element={<Error403Page />} />
                     <Route path='/bao-loi-404' element={<Error404Page />} />
                     <Route path='/chinh-sach' element={<ChinhSach />} />

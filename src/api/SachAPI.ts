@@ -67,10 +67,23 @@ export async function layToanBoSach(trang: number):Promise<KetQuaInterface> {
     return laySach(duongDan);
 }
 
-export async function lay3SachBanChay():Promise<KetQuaInterface> {
+export async function lay3SachBanChay():Promise<SachModel[]> {
     // xac dinh endpoint
-    const duongDan: string = endpointBE+'/sach?sort=soLuongBan,desc&page=0&size=3';
-    return laySach(duongDan);
+    const endpoint: string = endpointBE+'/sach?sort=soLuongBan,desc&page=0&size=3';
+    let bookList = await laySach(endpoint);
+    // Use Promise.all to wait for all promises in the map to resolve
+    let newBookList = await Promise.all(bookList.ketQua.map(async (book: any) => {
+        // Trả về quyển sách
+        const responseImg = await layToanBoAnhCuaMotSach(book.idBook);
+        const thumbnail = responseImg.find(image => image.thumbnail);
+
+        return {
+            ...book,
+            thumbnail: thumbnail ? thumbnail.duongDan : null,
+        };
+    }));
+
+    return newBookList;
 }
 
 //
