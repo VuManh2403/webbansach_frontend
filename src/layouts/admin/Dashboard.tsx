@@ -5,7 +5,7 @@ import {layToanBoQuyenNguoiDung} from "../../api/NguoiDungAPI";
 import {layTatCaDonHang} from "../../api/DonHangAPI";
 import {layTongSoSach} from "../../api/SachAPI";
 import {layTongSoDanhGia} from "../../api/DanhGiaAPI";
-import {ThongSoKyThuat} from "./ThongSoKyThuat";
+import {ThongSoKyThuat} from "./component/ThongSoKyThuat";
 import {BieuDo} from "./bieudo/BieuDo";
 
 const Dashboard = () => {

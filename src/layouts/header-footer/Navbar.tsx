@@ -1,9 +1,13 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import {Search} from "react-bootstrap-icons";
 import {dangXuat, getAvatarByToken, getQuyenByToken, getTenByToken, kiemTraToken} from "../utils/JwtService";
 import { Avatar } from "@mui/material";
 import { Dropdown } from 'react-bootstrap';
+import TheLoaiModel from "../../model/TheLoaiModel";
+import {layTatCaTheLoai} from "../../api/TheLoaiAPI";
+import {useGioHang} from "../utils/QuanLyGioHang";
+import {useQuanLyDangNhap} from "../utils/QuanLyDangNhap";
 
 
 interface NavbarProps {
@@ -16,6 +20,24 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
     // t tao bien tuKhoaTamThoi den khi nhan nut thi ms gan tuKhoaTimKiem = tuKhoaTamThoi
     const [tuKhoaTamThoi, setTuKhoaTamThoi] = useState('');
 
+    // Lấy tất cả thể loại
+    const [danhSachTheLoai, setDanhSachTheLoai] = useState<TheLoaiModel[]>([]);
+    const [erroring, setErroring] = useState(null);
+    useEffect(() => {
+        layTatCaTheLoai()
+            .then((response) => {
+                setDanhSachTheLoai(response.danhSachTheLoai);
+            })
+            .catch((error) => {
+                setErroring(error.message);
+            });
+    }, []);
+    if (erroring) {
+        console.error(erroring);
+    }
+
+    const { tongSoSanPham, setTongSoSanPham, setDanhSachGioHang } = useGioHang();
+    const { setLoggedIn } = useQuanLyDangNhap();
     const navigate = useNavigate();
     const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>)=>{
         setTuKhoaTamThoi(e.target.value);
@@ -48,10 +70,19 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                             <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Thể loại sách
                             </NavLink>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <li><NavLink className="dropdown-item" to="/1">Thể loại 1</NavLink></li>
-                                <li><NavLink className="dropdown-item" to="/2">Thể loại 2</NavLink></li>
-                                <li><NavLink className="dropdown-item" to="/3">Thể loại 3</NavLink></li>
+                            <ul className='dropdown-menu'>
+                                {danhSachTheLoai.map((genre, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <Link
+                                                className='dropdown-item'
+                                                to={`/search/${genre.maTheLoai}`}
+                                            >
+                                                {genre.tenTheLoai}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </li>
                         <li className="nav-item">
@@ -140,10 +171,10 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                     </Dropdown.Item>
                                 )}
                                 <Dropdown.Item onClick={() => {
-                                    // setTotalCart(0);
+                                    setTongSoSanPham(0);
                                     dangXuat(navigate);
-                                    // setLoggedIn(false);
-                                    // setCartList([]);
+                                    setLoggedIn(false);
+                                    setDanhSachGioHang([]);
                                 }} style={{ cursor: "pointer" }}>
                                     Đăng xuất
                                 </Dropdown.Item>

@@ -7,14 +7,14 @@ import TheLoaiModel from "../model/TheLoaiModel";
 import {layTheLoaiByMaSach} from "./TheLoaiAPI";
 
 interface KetQuaInterface{
-    ketQua: SachModel[];
+    danhSachSach: SachModel[];
     tongSoTrang: number;
     tongSoSach: number;
 }
 
 // tach duong dan ra -> duong dan thay doi thi ket qua lay dc se thay doi
 async function laySach(duongDan: string):Promise<KetQuaInterface>{
-    const ketQua:SachModel[] = [];
+    const danhSachSach:SachModel[] = [];
 
     // Gọi phương thức request
     const response = await my_request(duongDan);
@@ -43,7 +43,7 @@ async function laySach(duongDan: string):Promise<KetQuaInterface>{
             };
         })
     );
-    return {ketQua: ketQua, tongSoTrang: tongSoTrang, tongSoSach: tongSoSach};
+    return {danhSachSach: danhSachSach, tongSoTrang: tongSoTrang, tongSoSach: tongSoSach};
 }
 
 export async function laySachHot(): Promise<KetQuaInterface> {
@@ -61,9 +61,13 @@ export async function laySachMoi(): Promise<KetQuaInterface> {
 }
 
 //Khi bạn dùng export async function trong JavaScript hoặc TypeScript, bạn đang vừa khai báo một hàm bất đồng bộ, vừa xuất (export) nó ra ngoài để các file/module khác có thể sử dụng.
-export async function layToanBoSach(trang: number):Promise<KetQuaInterface> {
+export async function layToanBoSach(size?: number, trang?: number):Promise<KetQuaInterface> {
+    // Nếu không truyền size thì mặc định là 8
+    if (!size) {
+        size = 8;
+    }
     // xac dinh endpoint
-    const duongDan: string = endpointBE+`/sach?sort=maSach,desc&size=8&page=${trang}`;
+    const duongDan: string = endpointBE+`/sach?sort=maSach,desc&size=${size}&page=${trang}`;
     return laySach(duongDan);
 }
 
@@ -72,7 +76,7 @@ export async function lay3SachBanChay():Promise<SachModel[]> {
     const endpoint: string = endpointBE+'/sach?sort=soLuongBan,desc&page=0&size=3';
     let bookList = await laySach(endpoint);
     // Use Promise.all to wait for all promises in the map to resolve
-    let newBookList = await Promise.all(bookList.ketQua.map(async (book: any) => {
+    let newBookList = await Promise.all(bookList.danhSachSach.map(async (book: any) => {
         // Trả về quyển sách
         const responseImg = await layToanBoAnhCuaMotSach(book.idBook);
         const thumbnail = responseImg.find(image => image.thumbnail);
@@ -109,7 +113,7 @@ export async function laySachTheoMaSach(maSach: number): Promise<SachModel|null>
 
     const duongDan = endpointBE+`/sach/${maSach}`;
 
-    let ketQua: SachModel = {
+    let danhSachSach: SachModel = {
         maSach: 0,
         tenSach: "",
         tenTacGia: "",
@@ -130,12 +134,12 @@ export async function laySachTheoMaSach(maSach: number): Promise<SachModel|null>
 
         // Kiểm tra xem dữ liệu endpoint trả về có dữ liệu không
         if(response){
-            ketQua = response;
+            danhSachSach = response;
             // Trả về quyển sách
             const responseImg = await layToanBoAnhCuaMotSach(response.idBook);
             const thumbnail = responseImg.filter(image => image.thumbnail);
             return {
-                ...ketQua,
+                ...danhSachSach,
                 thumbnail: thumbnail[0].duongDan,
             };
         }else{

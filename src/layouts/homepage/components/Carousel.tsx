@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SachModel from "../../../model/SachModel";
-import {lay3SachMoiNhatSach} from "../../../api/SachAPI";
+import {lay3SachBanChay} from "../../../api/SachAPI";
 import { error } from "console";
 import CarouselItem from "./CarouselItem";
 
@@ -14,9 +14,9 @@ const Carousel: React.FC = () =>  {
     // lay du lieu
     useEffect(() => {
 
-            lay3SachMoiNhatSach().then(
+            lay3SachBanChay().then(
                 kq =>{
-                    setDanhSachQuyenSach(kq.ketQua);
+                    setDanhSachQuyenSach(kq);
                     setDangTaiDuLieu(false);
                 }
             ).catch(

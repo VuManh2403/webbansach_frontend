@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import SachModel from "../../../model/SachModel";
 import HinhAnhModel from "../../../model/HinhAnhModel";
 import {layToanBoAnhCuaMotSach} from "../../../api/HinhAnhAPI";
-import { error } from "console";
 import {Link} from "react-router-dom";
 import renderRating from "../../utils/SaoXepHang";
 import dinhDangSo from "../../utils/DinhDangSo";

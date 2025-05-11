@@ -1,7 +1,14 @@
-import React, { FormEvent, useState } from 'react';
-import RequireAdmin from '../RequireAdmin';
-import {Typography} from "@mui/material";
+import React, { FormEvent, useEffect, useState } from 'react';
+import {Box, Button, TextField, Typography} from "@mui/material";
 import SachModel from '../../../model/SachModel';
+import TheLoaiModel from "../../../model/TheLoaiModel";
+import {laySachTheoMaLienQuan} from "../../../api/SachAPI";
+import {layTatCaTheLoai} from "../../../api/TheLoaiAPI";
+import { endpointBE } from '../../utils/Constant';
+import { toast } from 'react-toastify';
+import { SelectMultiple } from '../../utils/SelectMultiple';
+import { CloudUpload } from '@mui/icons-material';
+import { LoadingButton } from "@mui/lab";
 
 interface SachFormProps {
     id: number;
@@ -10,7 +17,7 @@ interface SachFormProps {
     handleCloseModal: any;
 }
 
-const SachForm: React.FC<SachFormProps> = (props) => {
+export const SachForm: React.FC<SachFormProps> = (props) => {
     const [sach, setSach] = useState<SachModel>({
         maSach: 0,
         tenSach: '',
@@ -24,38 +31,186 @@ const SachForm: React.FC<SachFormProps> = (props) => {
         giamGia:0,
         thumbnail:"",
         danhSachAnh:[],
-        maTheLoai:[],
+        danhSachTheLoai:[],
     })
 
-    const handleSubmit = (event: FormEvent) => {
+    const [danhSachTheLoai, setDanhSachTheLoai] = useState<TheLoaiModel[]>([]);
+    const [danhSachTheLoaiDaChon, setDanhSachTheLoaiDaChon] = useState<number[]>([]);
+    const [danhGiaThumbnail, setDanhGiaThumbnail] = useState("");
+    const [danhSachHinhAnhDanhGia, setDanhSachHinhAnhDanhGia] = useState<string[]>(
+        []
+    );
+    // Giá trị khi đã chọn ở trong select multiple
+    const [SelectedListName, setSelectedListName] = useState<any[]>([]);
+    // Khi submit thì btn loading ...
+    const [statusBtn, setStatusBtn] = useState(false);
+    // Biến reload (cho selectMultiple)
+    const [reloadCount, setReloadCount] = useState(0);
+
+    // Lấy dữ liệu khi update
+    useEffect(() => {
+        if (props.option === "update") {
+            laySachTheoMaLienQuan(props.id).then((response) => {
+                setSach(response as SachModel);
+                setDanhGiaThumbnail(response?.thumbnail as string);
+                setDanhSachHinhAnhDanhGia(response?.danhSachAnh as string[]);
+                response?.danhSachTheLoai?.forEach((data) => {
+                    setSelectedListName((prev) => [...prev, data.tenTheLoai]);
+                    setSach((prevBook) => {
+                        return {
+                            ...prevBook,
+                            maTheLoai: [...(prevBook.maTheLoai || []), data.maTheLoai],
+                        };
+                    });
+                });
+            });
+        }
+    }, [props.option, props.id]);
+
+    // Khúc này lấy ra tất cả thể loại để cho vào select
+    useEffect(() => {
+        layTatCaTheLoai().then((response) => {
+            setDanhSachTheLoai(response.danhSachTheLoai);
+        });
+    }, [props.option]);
+
+    // Khúc này để lưu danh sách thể loại của sách
+    useEffect(() => {
+        setSach({ ...sach, maTheLoai: danhSachTheLoaiDaChon });
+    }, [danhSachTheLoaiDaChon]);
+
+    async function hanleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const token = localStorage.getItem('token');
-        fetch(  'http://localhost:8080/sach',
-            {
-                method: 'POST',
+
+        const token = localStorage.getItem("token");
+
+        let bookRequest: SachModel = sach;
+        if (bookRequest.giamGia === 0) {
+            bookRequest = { ...sach, giaBan: sach.giaNiemYet };
+        }
+
+        // console.log(book);
+
+        setStatusBtn(true);
+
+        const endpoint =
+            props.option === "add"
+                ? endpointBE + "/chinh-sua-sach/them-sach"
+                : endpointBE + "/chinh-sua-sach/cap-nhap-sach";
+        const method = props.option === "add" ? "POST" : "PUT";
+        toast.promise(
+            fetch(endpoint, {
+                method: method,
                 headers: {
-                    'Content-Type' : 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    "content-type": "application/json",
                 },
-                body: JSON.stringify(sach)
-            }
-        ).then((reponse)=>{
-            if(reponse.ok){
-                alert("Đã thêm sách thành công!");
-                setSach({
-                    maSach: 0,
-                    tenSach: '',
-                    giaBan: 0,
-                    giaNiemYet: 0,
-                    moTa: '',
-                    soLuong: 0,
-                    tenTacGia: '',
-                    trungBinhXepHang: 0
+                body: JSON.stringify(bookRequest),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        setSach({
+                            maSach: 0,
+                            tenSach: '',
+                            giaBan: NaN,
+                            giaNiemYet: NaN,
+                            moTa: '',
+                            soLuong: NaN,
+                            tenTacGia: '',
+                            trungBinhXepHang: NaN,
+                            soLuongBan:NaN,
+                            giamGia:0,
+                            thumbnail:"",
+                            danhSachAnh:[],
+                            danhSachTheLoai:[],
+                        });
+                        setDanhGiaThumbnail("");
+                        setDanhSachHinhAnhDanhGia([]);
+                        setReloadCount(Math.random());
+                        setStatusBtn(false);
+                        props.setKeyCountReload(Math.random());
+                        props.handleCloseModal();
+                        props.option === "add"
+                            ? toast.success("Thêm sách thành công")
+                            : toast.success("Cập nhật sách thành công");
+                    } else {
+                        toast.error("Gặp lỗi trong quá trình xử lý sách");
+                        setStatusBtn(false);
+                    }
                 })
-            }else{
-                alert("Gặp lỗi trong quá trình thêm sách!");
+                .catch((error) => {
+                    console.log(error);
+                    setStatusBtn(false);
+                    toast.error("Gặp lỗi trong quá trình xử lý sách");
+                }),
+            {
+                pending: "Đang trong quá trình xử lý ...",
             }
-        })
+        );
+    }
+
+    function handleThumnailImageUpload(
+        event: React.ChangeEvent<HTMLInputElement>
+    ) {
+        const inputElement = event.target as HTMLInputElement;
+
+        if (inputElement.files && inputElement.files.length > 0) {
+            const selectedFile = inputElement.files[0];
+
+            const reader = new FileReader();
+
+            // Xử lý sự kiện khi tệp đã được đọc thành công
+            reader.onload = (e: any) => {
+                // e.target.result chính là chuỗi base64
+                const thumnailBase64 = e.target?.result as string;
+
+                setSach({ ...sach, thumbnail: thumnailBase64 });
+
+                setDanhGiaThumbnail(URL.createObjectURL(selectedFile));
+            };
+
+            // Đọc tệp dưới dạng chuỗi base64
+            reader.readAsDataURL(selectedFile);
+        }
+    }
+
+    function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
+        const inputElement = event.target as HTMLInputElement;
+
+        if (inputElement.files && inputElement.files.length > 0) {
+            const newPreviewImages = [...danhSachHinhAnhDanhGia];
+
+            if (newPreviewImages.length + inputElement.files.length > 5) {
+                toast.warning("Chỉ được tải lên tối đa 5 ảnh");
+                return;
+            }
+
+            // Duyệt qua từng file đã chọn
+            for (let i = 0; i < inputElement.files.length; i++) {
+                const selectedFile = inputElement.files[i];
+
+                const reader = new FileReader();
+
+                // Xử lý sự kiện khi tệp đã được đọc thành công
+                reader.onload = (e: any) => {
+                    // e.target.result chính là chuỗi base64
+                    const thumbnailBase64 = e.target?.result as string;
+
+                    setSach((prevBook) => ({
+                        ...prevBook,
+                        relatedImg: [...(prevBook.danhSachAnh || []), thumbnailBase64],
+                    }));
+
+                    newPreviewImages.push(URL.createObjectURL(selectedFile));
+
+                    // Cập nhật trạng thái với mảng mới
+                    setDanhSachHinhAnhDanhGia(newPreviewImages);
+                };
+
+                // Đọc tệp dưới dạng chuỗi base64
+                reader.readAsDataURL(selectedFile);
+            }
+        }
     }
 
     return (
@@ -66,7 +221,7 @@ const SachForm: React.FC<SachFormProps> = (props) => {
             <hr/>
             <div className='container px-5'>
                 <form onSubmit={hanleSubmit} className='form'>
-                    <input type='hidden' id='idBook' value={book?.idBook} hidden/>
+                    <input type='hidden' id='maSach' value={sach?.maSach} hidden/>
                     <div className='row'>
                         <div
                             className={props.option === "update" ? "col-4" : "col-6"}
@@ -81,9 +236,9 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     id='filled-required'
                                     label='Tên sách'
                                     style={{width: "100%"}}
-                                    value={book.nameBook}
+                                    value={sach.tenSach}
                                     onChange={(e: any) =>
-                                        setBook({...book, nameBook: e.target.value})
+                                        setSach({...sach, tenSach: e.target.value})
                                     }
                                     size='small'
                                 />
@@ -93,9 +248,9 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     id='filled-required'
                                     label='Tên tác giả'
                                     style={{width: "100%"}}
-                                    value={book.author}
+                                    value={sach.tenTacGia}
                                     onChange={(e: any) =>
-                                        setBook({...book, author: e.target.value})
+                                        setSach({...sach, tenTacGia: e.target.value})
                                     }
                                     size='small'
                                 />
@@ -107,12 +262,12 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     style={{width: "100%"}}
                                     type='number'
                                     value={
-                                        Number.isNaN(book.listPrice) ? "" : book.listPrice
+                                        Number.isNaN(sach.giaNiemYet) ? "" : sach.giaNiemYet
                                     }
                                     onChange={(e: any) =>
-                                        setBook({
-                                            ...book,
-                                            listPrice: parseInt(e.target.value),
+                                        setSach({
+                                            ...sach,
+                                            giaNiemYet: parseInt(e.target.value),
                                         })
                                     }
                                     size='small'
@@ -134,23 +289,23 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     style={{width: "100%"}}
                                     type='number'
                                     value={
-                                        Number.isNaN(book.quantity) ? "" : book.quantity
+                                        Number.isNaN(sach.soLuong) ? "" : sach.soLuong
                                     }
                                     onChange={(e: any) =>
-                                        setBook({
-                                            ...book,
-                                            quantity: parseInt(e.target.value),
+                                        setSach({
+                                            ...sach,
+                                            soLuong: parseInt(e.target.value),
                                         })
                                     }
                                     size='small'
                                 />
                                 <SelectMultiple
-                                    selectedList={genresListSelected}
-                                    setSelectedList={setGenresListSelected}
+                                    selectedList={danhSachTheLoaiDaChon}
+                                    setSelectedList={setDanhSachTheLoaiDaChon}
                                     selectedListName={SelectedListName}
                                     setSelectedListName={setSelectedListName}
-                                    values={genresList}
-                                    setValue={setBook}
+                                    values={danhSachTheLoai}
+                                    setValue={setSach}
                                     key={reloadCount}
                                     required={true}
                                 />
@@ -161,18 +316,18 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     style={{width: "100%"}}
                                     type='number'
                                     value={
-                                        Number.isNaN(book.discountPercent)
+                                        Number.isNaN(sach.giamGia)
                                             ? ""
-                                            : book.discountPercent
+                                            : sach.giamGia
                                     }
                                     onChange={(e: any) => {
-                                        setBook({
-                                            ...book,
-                                            discountPercent: parseInt(e.target.value),
-                                            sellPrice:
-                                                book.listPrice -
+                                        setSach({
+                                            ...sach,
+                                            giamGia: parseInt(e.target.value),
+                                            giaBan:
+                                                sach.giaNiemYet -
                                                 Math.round(
-                                                    (book.listPrice *
+                                                    (sach.giaNiemYet *
                                                         Number.parseInt(e.target.value)) /
                                                     100
                                                 ),
@@ -193,7 +348,7 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                         id='filled-required'
                                         label='Giá bán'
                                         style={{width: "100%"}}
-                                        value={book.sellPrice.toLocaleString("vi-vn")}
+                                        value={sach.giaBan.toLocaleString("vi-vn")}
                                         type='number'
                                         InputProps={{
                                             disabled: true,
@@ -205,7 +360,7 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                         id='filled-required'
                                         label='Đã bán'
                                         style={{width: "100%"}}
-                                        value={book.soldQuantity}
+                                        value={sach.soLuongBan}
                                         InputProps={{
                                             disabled: true,
                                         }}
@@ -216,7 +371,7 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                         id='filled-required'
                                         label='Điểm đánh giá'
                                         style={{width: "100%"}}
-                                        value={book.avgRating}
+                                        value={sach.trungBinhXepHang}
                                         InputProps={{
                                             disabled: true,
                                         }}
@@ -233,9 +388,9 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     style={{width: "100%"}}
                                     multiline
                                     maxRows={5}
-                                    value={book.description}
+                                    value={sach.moTa}
                                     onChange={(e: any) =>
-                                        setBook({...book, description: e.target.value})
+                                        setSach({...sach, moTa: e.target.value})
                                     }
                                     required
                                 />
@@ -258,7 +413,7 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     alt=''
                                 />
                             </Button>
-                            <img src={previewThumbnail} alt='' width={100}/>
+                            <img src={danhGiaThumbnail} alt='' width={100}/>
                         </div>
                         <div className='d-flex align-items-center mt-3'>
                             <Button
@@ -278,14 +433,14 @@ const SachForm: React.FC<SachFormProps> = (props) => {
                                     alt=''
                                 />
                             </Button>
-                            {previewRelatedImages.map((imgURL) => (
+                            {danhSachHinhAnhDanhGia.map((imgURL) => (
                                 <img src={imgURL} alt='' width={100}/>
                             ))}
-                            {previewRelatedImages.length > 0 && (
+                            {danhSachHinhAnhDanhGia.length > 0 && (
                                 <Button
                                     onClick={() => {
-                                        setPreviewRelatedImages([]);
-                                        setBook({...book, relatedImg: []});
+                                        setDanhSachHinhAnhDanhGia([]);
+                                        setSach({...sach, danhSachAnh: []});
                                     }}
                                 >
                                     Xoá tất cả
@@ -308,7 +463,5 @@ const SachForm: React.FC<SachFormProps> = (props) => {
             </div>
         </div>
     );
-}
+};
 
-const SachForm_Admin = RequireAdmin(SachForm);
-export default SachForm_Admin;
