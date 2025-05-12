@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import {Search} from "react-bootstrap-icons";
-import {dangXuat, getAvatarByToken, getQuyenByToken, getTenByToken, kiemTraToken} from "../utils/JwtService";
+import {dangXuat, kiemTraToken, layAvatarByToken, layQuyenByToken, layTenByToken} from "../utils/JwtService";
 import { Avatar } from "@mui/material";
 import { Dropdown } from 'react-bootstrap';
 import TheLoaiModel from "../../model/TheLoaiModel";
@@ -152,8 +152,8 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                 style={{ padding: 0 }}>
                                 <Avatar
                                     style={{ fontSize: "14px" }}
-                                    alt={getTenByToken()?.toUpperCase()}
-                                    src={getAvatarByToken()}
+                                    alt={layTenByToken()?.toUpperCase()}
+                                    src={layAvatarByToken()}
                                     sx={{ width: 30, height: 30 }}
                                 />
                             </Dropdown.Toggle>
@@ -165,7 +165,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                 <Dropdown.Item as={Link} to="/my-favorite-books">
                                     Sách yêu thích của tôi
                                 </Dropdown.Item>
-                                {getQuyenByToken() === "ADMIN" && (
+                                {layQuyenByToken() === "ADMIN" && (
                                     <Dropdown.Item as={Link} to="/admin">
                                         Quản lý
                                     </Dropdown.Item>

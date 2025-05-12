@@ -23,7 +23,7 @@ export function kiemTraToken() {
 }
 
 
-export function getAvatarByToken() {
+export function layAvatarByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
@@ -31,7 +31,7 @@ export function getAvatarByToken() {
     }
 }
 
-export function getTenByToken() {
+export function layTenByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
@@ -39,14 +39,14 @@ export function getTenByToken() {
     }
 }
 
-export function getTenDangNhapByToken() {
+export function layTenDangNhapByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         return jwtDecode(token).sub;
     }
 }
 
-export function getMaNguoiDungByToken() {
+export function layMaNguoiDungByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
@@ -54,7 +54,7 @@ export function getMaNguoiDungByToken() {
     }
 }
 
-export function getQuyenByToken() {
+export function layQuyenByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;

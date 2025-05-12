@@ -1,11 +1,11 @@
 import GioHangModel from "../model/GioHangModel";
-import {getMaNguoiDungByToken} from "../layouts/utils/JwtService";
 import {endpointBE} from "../layouts/utils/Constant";
 import {my_request} from "./Request";
 import {laySachTheoMaGioHang} from "./SachAPI";
+import { layMaNguoiDungByToken } from "../layouts/utils/JwtService";
 
-export async function LayTatCaGioHangByMaNguoiDung(): Promise<GioHangModel[]> {
-    const idUser = getMaNguoiDungByToken();
+export async function layTatCaGioHangByMaNguoiDung(): Promise<GioHangModel[]> {
+    const idUser = layMaNguoiDungByToken();
     const endpoint = endpointBE + `/nguoi-dung/${idUser}/danhSachDonhang`;
     try {
         const cartResponse = await my_request(endpoint);

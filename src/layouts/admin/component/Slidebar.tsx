@@ -1,8 +1,9 @@
+import React from "react";
+import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import PersonIcon from "@mui/icons-material/Person";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import {useGioHang} from "../../utils/QuanLyGioHang";
 import {useQuanLyDangNhap} from "../../utils/QuanLyDangNhap";
@@ -22,7 +23,7 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 		>
 			<div className='px-3'>
 				<Link
-					className='text-decoration-none d-flex align-items-center text-white d-none d-sm-flex align-items-sm-center justify-content-center'
+					className='text-decoration-none d-flex align-items-center text-white d-none d-sm-flex align-items-sm-center justify-content-start px-3'
 					to='/'
 				>
 					<img
@@ -36,7 +37,8 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 					<li className='nav-item'>
 						<NavLink
 							to={"/admin/dashboard"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							className={`nav-link d-flex align-items-center justify-content-start px-3`}
+							style={{ color: 'white', opacity: 1 }}
 						>
 							<DashboardIcon fontSize='small' />
 							<span className='ms-2 d-none d-sm-inline d-md-inline'>
@@ -46,19 +48,21 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 					</li>
 					<li className='nav-item'>
 						<NavLink
-							to={"/admin/book"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to={"/admin/sach"}
+							className={`nav-link d-flex align-items-center justify-content-start px-3`}
+							style={{ color: 'white', opacity: 1 }}
 						>
 							<MenuBookRoundedIcon fontSize='small' />
 							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Quản lý Sách
+								Quản lý sách
 							</span>
 						</NavLink>
 					</li>
 					<li className='nav-item '>
 						<NavLink
-							to={"/admin/genre"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to={"/admin/the-loai"}
+							className={`nav-link d-flex align-items-center justify-content-start px-3`}
+							style={{ color: 'white', opacity: 1 }}
 						>
 							<CategoryRoundedIcon fontSize='small' />
 							<span className='ms-2 d-none d-sm-inline d-md-inline'>
@@ -68,8 +72,9 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 					</li>
 					<li className='nav-item '>
 						<NavLink
-							to={"/admin/user"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to={"/admin/nguoi-dung"}
+							className={`nav-link d-flex align-items-center justify-content-start px-3`}
+							style={{ color: 'white', opacity: 1 }}
 						>
 							<ManageAccountsIcon fontSize='small' />
 							<span className='ms-2 d-none d-sm-inline d-md-inline'>
@@ -79,8 +84,9 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 					</li>
 					<li className='nav-item '>
 						<NavLink
-							to={"/admin/order"}
-							className={`nav-link d-flex align-items-center justify-content-center `}
+							to={"/admin/don-hang"}
+							className={`nav-link d-flex align-items-center justify-content-start px-3 `}
+							style={{ color: 'white', opacity: 1 }}
 						>
 							<LocalMallRoundedIcon fontSize='small' />
 							<span className='ms-2 d-none d-sm-inline d-md-inline'>
@@ -93,7 +99,7 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 			</div>
 			<div className='dropdown open text-center'>
 				<a
-					className='my-3 btn border-0 dropdown-toggle text-white d-inline-flex align-items-center justify-content-center'
+					className='my-3 btn border-0 dropdown-toggle text-white d-inline-flex align-items-center justify-content-start px-3'
 					type='button'
 					id='triggerId'
 					data-bs-toggle='dropdown'

@@ -3,7 +3,7 @@ import NguoiDungModel from "../model/NguoiDungModel";
 
 class DonHangModel{
     maDonHang: number;
-    diaChiMuaHang: string;
+    diaChiGiaoHang: string;
     tongTienSanPham: number;
     tongTien: number;
     chiPhiGiaoHang: number;
@@ -18,9 +18,9 @@ class DonHangModel{
     gioHang?: GioHangModel[]
 
 
-    constructor(maDonHang: number, diaChiMuaHang: string, tongTienSanPham: number, tongTien: number, chiPhiGiaoHang: number, chiPhiThanhToan: number, ngayTao: Date, trangThai: string, nguoiDung: NguoiDungModel, hoVaTen: string, soDienThoai: string, ghiChu: string, thanhToan: string, gioHang: GioHangModel[]) {
+    constructor(maDonHang: number, diaChiGiaoHang: string, tongTienSanPham: number, tongTien: number, chiPhiGiaoHang: number, chiPhiThanhToan: number, ngayTao: Date, trangThai: string, nguoiDung: NguoiDungModel, hoVaTen: string, soDienThoai: string, ghiChu: string, thanhToan: string, gioHang: GioHangModel[]) {
         this.maDonHang = maDonHang;
-        this.diaChiMuaHang = diaChiMuaHang;
+        this.diaChiGiaoHang = diaChiGiaoHang;
         this.tongTienSanPham = tongTienSanPham;
         this.tongTien = tongTien;
         this.chiPhiGiaoHang = chiPhiGiaoHang;

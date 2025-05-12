@@ -42,7 +42,7 @@ export async function layTatCaDonHangbyMaNguoiDung(maNguoiDung: number): Promise
         const responsePayment = await my_request(endpointBE + `/don-hang/${data.maDonHang}/hinhThucThanhToan`);
         const order: DonHangModel = {
             maDonHang: data.maDonHang,
-            diaChiMuaHang: data.diaChiMuaHang,
+            diaChiGiaoHang: data.diaChiGiaoHang,
             tongTienSanPham: data.tongTienSanPham,
             tongTien: data.tongTien,
             chiPhiGiaoHang: data.chiPhiGiaoHang,
@@ -60,7 +60,7 @@ export async function layTatCaDonHangbyMaNguoiDung(maNguoiDung: number): Promise
     return datas;
 }
 
-export async function lay10DonHang(maDonHang: number): Promise<DonHangModel> {
+export async function lay1DonHang(maDonHang: number): Promise<DonHangModel> {
     const endpoint: string = endpointBE + `/don-hang/${maDonHang}`;
     const responseOrder = await my_request(endpoint);
     const responsePayment = await my_request(endpointBE + `/don-hang/${responseOrder.maDonHang}/hinhThucThanhToan`);
@@ -75,7 +75,7 @@ export async function lay10DonHang(maDonHang: number): Promise<DonHangModel> {
 
     const order: DonHangModel = {
         maDonHang: responseOrder.maDonHang,
-        diaChiMuaHang: responseOrder.diaChiMuaHang,
+        diaChiGiaoHang: responseOrder.diaChiGiaoHang,
         tongTienSanPham: responseOrder.tongTienSanPham,
         tongTien: responseOrder.tongTien,
         chiPhiGiaoHang: responseOrder.chiPhiGiaoHang,
