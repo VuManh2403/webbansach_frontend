@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SachModel from "../../../model/SachModel";
 import {lay3SachBanChay} from "../../../api/SachAPI";
-import { error } from "console";
 import CarouselItem from "./CarouselItem";
 
 

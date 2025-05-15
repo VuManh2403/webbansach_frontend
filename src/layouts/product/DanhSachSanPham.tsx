@@ -1,102 +1,177 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import "../products/Book.css";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import { Skeleton} from "@mui/material";
 import SachModel from "../../model/SachModel";
-import SachProps from "./components/SachProps";
 import {layToanBoSach, timKiemSach} from "../../api/SachAPI";
+import SachProps from "./components/SachProps";
 import {PhanTrang} from "../utils/PhanTrang";
 
 interface DanhSachSanPhamProps {
-    tuKhoaTimKiem: string;
-    maTheLoai: number;
+    paginable?: boolean;
+    size?: number;
+    keySearch?: string | undefined;
+    idGenre?: number;
+    filter?: number;
 }
 
-function DanhSachSanPham({ tuKhoaTimKiem, maTheLoai }: DanhSachSanPhamProps) {
+const DanhSachSanPham: React.FC<DanhSachSanPhamProps> = (props) => {
+    const [bookList, setDanhSachSanPham] = useState<SachModel[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [erroring, setErroring] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
-    const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
-    const [baoLoi, setBaoLoi] = useState(null);
+    // const [totalBook, setTotalBook] = useState(0);
 
-    // phan trang
-    const [trangHienTai, setTrangHienTai] = useState(1);
-    const [tongSoTrang, setTongSoTrang] = useState(0);
-    const [tongSOSach, setTongSoSach] = useState(0);
-
-    // lay du lieu
-    useEffect(() => {
-        if (tuKhoaTimKiem === '' && maTheLoai==0) {
-            layToanBoSach(trangHienTai - 1).then(
-                kq => {
-                    setDanhSachQuyenSach(kq.ketQua);
-                    setTongSoTrang(kq.tongSoTrang);
-                    setDangTaiDuLieu(false);
-                }
-            ).catch(
-                error => {
-                    setDangTaiDuLieu(false);
-                    setBaoLoi(error.message);
-                }
-            );
-        }else{
-            timKiemSach(tuKhoaTimKiem, maTheLoai).then(
-                kq => {
-                    setDanhSachQuyenSach(kq.ketQua);
-                    setTongSoTrang(kq.tongSoTrang);
-                    setDangTaiDuLieu(false);
-                }
-            ).catch(
-                error => {
-                    setDangTaiDuLieu(false);
-                    setBaoLoi(error.message);
-                }
-            );
-        }
-    }, [trangHienTai, tuKhoaTimKiem, maTheLoai]); // khi noi dung trong ngoac [] thay doi thi lam useEffect se thay doi
-
-
-    const phanTrang = (trang: number) => {
-        setTrangHienTai(trang);
+    // Xử lý phân trang
+    const handlePagination = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo(0, 0);
     };
 
-    if(dangTaiDuLieu){
-        return (
-          <div>
-              <h1>Đang tải dữ liệu...</h1>
-          </div>
-        );
+    // Chỗ này xử lý khi thực hiện chức năng hiện số sản phẩm
+    const [totalPagesTemp, setTotalPagesTemp] = useState(totalPages);
+    if (totalPagesTemp !== totalPages) {
+        setCurrentPage(1);
+        setTotalPagesTemp(totalPages);
     }
 
-    if (baoLoi) {
-        return(
-            <div>
-                <h1>Gặp lỗi: {baoLoi}</h1>
-            </div>
-        );
-    }
+    useEffect(() => {
+        // Mặc đinh sẽ gọi getAllBook
+        if (
+            (props.keySearch === "" &&
+                props.idGenre === 0 &&
+                props.filter === 0) ||
+            props.keySearch === undefined
+        ) {
+            // currentPage - 1 vì trong endpoint trang đầu tiên sẽ là 0
+            layToanBoSach(props.size, currentPage - 1) // size là (tổng sản phẩm được hiện)
+                .then((response) => {
+                    setDanhSachSanPham(response.danhSachSach);
+                    setTotalPages(response.tongSoTrang);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    setErroring(error.message);
+                });
+        } else {
+            // Khi có các param lọc
+            timKiemSach(
+                props.keySearch,
+                props.idGenre,
+                props.filter,
+                props.size,
+                currentPage - 1
+            )
+                .then((response) => {
+                    setDanhSachSanPham(response.danhSachSach);
+                    setTotalPages(response.tongSoTrang);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    setErroring(error.message);
+                });
+        }
+    }, [currentPage, props.keySearch, props.idGenre, props.filter, props.size]);
 
-    if(danhSachQuyenSach.length===0){
+    if (loading) {
         return (
-            <div className="container">
-                <div className="d-flex align-items-center justify-content-center">
-                    <h1>Hiện không tìm thấy sách theo yêu cầu!</h1>
+            <div className='container-book container mb-5 py-5 px-5 bg-light'>
+                <div className='row'>
+                    <div className='col-md-6 col-lg-3 mt-3'>
+                        <Skeleton
+                            className='my-3'
+                            variant='rectangular'
+                            height={400}
+                        />
+                    </div>
+                    <div className='col-md-6 col-lg-3 mt-3'>
+                        <Skeleton
+                            className='my-3'
+                            variant='rectangular'
+                            height={400}
+                        />
+                    </div>
+                    <div className='col-md-6 col-lg-3 mt-3'>
+                        <Skeleton
+                            className='my-3'
+                            variant='rectangular'
+                            height={400}
+                        />
+                    </div>
+                    <div className='col-md-6 col-lg-3 mt-3'>
+                        <Skeleton
+                            className='my-3'
+                            variant='rectangular'
+                            height={400}
+                        />
+                    </div>
                 </div>
             </div>
         );
     }
 
-    return (
-
-
-        <div className="container">
-            <div className="row mt-4 mb-4">
-                {
-                    danhSachQuyenSach.map((sach) => (
-                            <SachProps key={sach.maSach} sach={sach} />
-                        )
-                    )
-                }
+    if (erroring) {
+        return (
+            <div>
+                <h1>Gặp lỗi: {erroring}</h1>
             </div>
-            <PhanTrang trangHienTai={trangHienTai} tongSoTrang={tongSoTrang} phanTrang={phanTrang}></PhanTrang>
+        );
+    }
+
+    // Kiểm tra danh sách sách xem có phần tử nào không
+    if (bookList.length === 0) {
+        return (
+            <div className='container-book container mb-5 px-5 px-5 bg-light'>
+                <h2 className='mt-4 px-3 py-3 mb-0'>
+                    Không tìm thấy sách! "{props.keySearch}"
+                </h2>
+            </div>
+        );
+    }
+
+    return (
+        <div className='container-book container mb-5 pb-5 px-5 bg-light'>
+            {!props.paginable && (
+                <>
+                    <h2 className='mt-4 px-3 py-3 mb-0'>TẤT CẢ</h2>
+                    <hr className='mt-0' />
+                </>
+            )}
+            <div className='row'>
+                {bookList.map((book) => (
+                    <SachProps key={book.maSach} sach={book} />
+                ))}
+            </div>
+            {props.paginable ? (
+                <>
+                    <hr className='mt-5' style={{ color: "#aaa" }} />
+                    <PhanTrang
+                        trangHienTai={currentPage}
+                        tongSoTrang={totalPages}
+                        phanTrang={handlePagination}
+                    />
+                </>
+            ) : (
+                <Link to={"/search"}>
+                    <div className='d-flex align-items-center justify-content-center'>
+                        <Button
+                            variant='outlined'
+                            size='large'
+                            className='text-primary mt-5 w-25'
+                        >
+                            Xem Thêm
+                        </Button>
+                    </div>
+                </Link>
+            )}
         </div>
     );
-}
+};
 
 export default DanhSachSanPham;

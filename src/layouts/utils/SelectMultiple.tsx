@@ -6,8 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-import TheLoaiModel from "../../model/TheLoaiModel";
-
+import GenreModel from "../../model/GenreModel";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -21,7 +20,7 @@ const MenuProps = {
 };
 
 interface SelectMultipleProps {
-	values: TheLoaiModel[]; // Giá trị để in ra dữ liệu select
+	values: GenreModel[]; // Giá trị để in ra dữ liệu select
 	selectedList: any[]; // Biến dữ liệu đã select
 	setSelectedList: any; // Hàm gán dữ liệu đã select
 	setValue: any; // Hàm gán lại dữ liệu
@@ -38,15 +37,15 @@ export const SelectMultiple: React.FC<SelectMultipleProps> = (props) => {
 
 		// Lọc từ dữ liệu vào so sánh với dữ liệu đã chọn
 		const dataSelected = props.values.filter((i) =>
-			value.includes(i.tenTheLoai)
+			value.includes(i.nameGenre)
 		);
 		// Từ dữ liệu trên lọc và lấy id ra
-		const dataSelectedId = dataSelected.map((i) => i.maTheLoai);
+		const dataSelectedId = dataSelected.map((i) => i.idGenre);
 
 		props.setSelectedList(dataSelectedId);
 
 		props.setSelectedListName(
-			// On auto fill we get a stringified value.
+			// On autofill we get a stringified value.
 			typeof value === "string" ? value.split(",") : value
 		);
 	};
@@ -67,13 +66,13 @@ export const SelectMultiple: React.FC<SelectMultipleProps> = (props) => {
 					required={props.required}
 				>
 					{props.values.map((genre) => (
-						<MenuItem key={genre.maTheLoai} value={genre.tenTheLoai}>
+						<MenuItem key={genre.idGenre} value={genre.nameGenre}>
 							<Checkbox
 								checked={
-									props.selectedListName.indexOf(genre.tenTheLoai) > -1
+									props.selectedListName.indexOf(genre.nameGenre) > -1
 								}
 							/>
-							<ListItemText primary={genre.tenTheLoai} />
+							<ListItemText primary={genre.nameGenre} />
 						</MenuItem>
 					))}
 				</Select>

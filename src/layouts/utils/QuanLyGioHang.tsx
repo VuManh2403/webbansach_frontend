@@ -1,50 +1,42 @@
-import GioHangModel from "../../model/GioHangModel";
-import {createContext, useContext, useEffect, useState} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import CartItemModel from "../../model/CartItemModel";
 
-//Quản lý trạng thái giỏ hàng toàn cục (global state) bằng React Context API.
-//
-// Tự động khởi tạo giỏ hàng từ localStorage khi app load
-//
-// Cho phép component bất kỳ trong cây CartItemProvider truy cập và cập nhật giỏ hàng
-//
-// Hạn chế truyền props qua nhiều cấp
-
-interface GioHangProps {
+interface CartItemProps {
     children: React.ReactNode;
 }
 
-interface GioHangType {
-    danhSachGioHang: GioHangModel[];
-    setDanhSachGioHang: any;
-    tongSoSanPham: number;
-    setTongSoSanPham: any;
+interface CartItemType {
+    cartList: CartItemModel[];
+    setCartList: any;
+    totalCart: number;
+    setTotalCart: any;
 }
 
-const GioHang = createContext<GioHangType | undefined>(undefined);
+const CartItem = createContext<CartItemType | undefined>(undefined);
 
-export const QuanLyGioHang: React.FC<GioHangProps> = (props) => {
-    const [danhSachGioHang, setDanhSachGioHang] = useState<GioHangModel[]>([]);
-    const [tongSoSanPham, setTongSoSanPham] = useState(0);
+export const CartItemProvider: React.FC<CartItemProps> = (props) => {
+    const [cartList, setCartList] = useState<CartItemModel[]>([]);
+    const [totalCart, setTotalCart] = useState(0);
 
     useEffect(() => {
-        const cartData: string | null = localStorage.getItem("gioHang");
-        let cart: GioHangModel[] = [];
+        const cartData: string | null = localStorage.getItem("cart");
+        let cart: CartItemModel[] = [];
         cart = cartData ? JSON.parse(cartData) : [];
-        setDanhSachGioHang(cart);
-        setTongSoSanPham(cart.length);
+        setCartList(cart);
+        setTotalCart(cart.length);
     }, []);
 
     return (
-        <GioHang.Provider
-            value={{ danhSachGioHang, setDanhSachGioHang, tongSoSanPham, setTongSoSanPham }}
+        <CartItem.Provider
+            value={{ cartList, setCartList, totalCart, setTotalCart }}
         >
             {props.children}
-        </GioHang.Provider>
+        </CartItem.Provider>
     );
 };
 
-export const useGioHang = (): GioHangType => {
-    const context = useContext(GioHang);
+export const useCartItem = (): CartItemType => {
+    const context = useContext(CartItem);
     if (!context) {
         throw new Error("Lỗi context");
     }

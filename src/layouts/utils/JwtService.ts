@@ -1,7 +1,6 @@
-import {jwtDecode} from "jwt-decode";
-import { JwtPayload } from "../admin/RequireAdmin";
-
-export function kiemTraTokenHetHan(token: string) {
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from "../../admin/RequireAdmin";
+export function isTokenExpired(token: string) {
     const decodedToken = jwtDecode(token);
 
     if (!decodedToken.exp) {
@@ -14,7 +13,7 @@ export function kiemTraTokenHetHan(token: string) {
     return currentTime < decodedToken.exp;
 }
 
-export function kiemTraToken() {
+export function isToken() {
     const token = localStorage.getItem('token');
     if (token) {
         return true;
@@ -23,7 +22,7 @@ export function kiemTraToken() {
 }
 
 
-export function layAvatarByToken() {
+export function getAvatarByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
@@ -31,39 +30,39 @@ export function layAvatarByToken() {
     }
 }
 
-export function layTenByToken() {
+export function getLastNameByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
-        return decodedToken.ten;
+        return decodedToken.lastName;
     }
 }
 
-export function layTenDangNhapByToken() {
+export function getUsernameByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         return jwtDecode(token).sub;
     }
 }
 
-export function layMaNguoiDungByToken() {
+export function getIdUserByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
-        return decodedToken.maNguoiDung;
+        return decodedToken.id;
     }
 }
 
-export function layQuyenByToken() {
+export function getRoleByToken() {
     const token = localStorage.getItem('token');
     if (token) {
         const decodedToken = jwtDecode(token) as JwtPayload;
-        return decodedToken.quyen;
+        return decodedToken.role;
     }
 }
 
-export function dangXuat(navigate: any) {
-    navigate("/dang-nhap");
+export function logout(navigate: any) {
+    navigate("/login");
     localStorage.removeItem('token');
     localStorage.removeItem('cart');
 }

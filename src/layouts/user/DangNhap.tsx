@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {useQuanLyDangNhap} from "../utils/QuanLyDangNhap";
 import { toast } from 'react-toastify';
 import {jwtDecode} from "jwt-decode";
-import { JwtPayload } from "../admin/RequireAdmin";
+import { JwtPayload } from "../../admin/RequireAdmin";
 import GioHangModel from "../../model/GioHangModel";
 import {layTatCaGioHangByMaNguoiDung} from "../../api/GioHangAPI";
 
