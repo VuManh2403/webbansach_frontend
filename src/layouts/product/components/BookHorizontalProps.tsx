@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
+import CartItemModel from "../../../model/CartItemModel";
+import ImageModel from "../../../model/ImageModel";
+import { getAllImageByBook } from "../../../api/ImageApi";
 import { Button, Chip } from "@mui/material";
 import RateReviewRoundedIcon from "@mui/icons-material/RateReviewRounded";
 import DoneIcon from "@mui/icons-material/Done";
 import { FadeModal } from "../../utils/FadeModal";
 import { Link } from "react-router-dom";
-import GioHangModel from "../../../model/GioHangModel";
-import HinhAnhModel from "../../../model/HinhAnhModel";
-import {layToanBoAnhCuaMotSach} from "../../../api/HinhAnhAPI";
 import TextEllipsis from "./ngatvanbanbangdau3cham/TextEllipsis";
-import { DanhGiaForm } from "../DanhGia/DanhGiaForm";
+import {ReviewForm} from "./danhgia/ReviewForm";
 
 interface BookHorizontalProps {
-	cartItem: GioHangModel;
+	cartItem: CartItemModel;
 	type?: any;
 	idOrder?: number;
 	handleCloseModalOrderDetail?: any;
@@ -25,24 +25,24 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 	const handleOpenModal = () => setOpenModal(true);
 	const handleCloseModal = () => setOpenModal(false);
 
-	const [cartItem, setCartItem] = useState<GioHangModel>(props.cartItem);
+	const [cartItem, setCartItem] = useState<CartItemModel>(props.cartItem);
 
-	const [imageList, setImageList] = useState<HinhAnhModel[]>([]);
+	const [imageList, setImageList] = useState<ImageModel[]>([]);
 	// Lấy ảnh ra từ BE
 	useEffect(() => {
-		layToanBoAnhCuaMotSach(props.cartItem.sach.maSach)
+		getAllImageByBook(props.cartItem.book.idBook)
 			.then((response) => {
 				setImageList(response);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-	}, [props.cartItem.sach.maSach]);
+	}, [props.cartItem.book.idBook]);
 	// Loading ảnh thumbnail
 	let dataImage;
 	if (imageList[0]) {
 		const thumbnail = imageList.filter((i) => i.thumbnail);
-		dataImage = thumbnail[0].duongDan || thumbnail[0].duLieuAnh;
+		dataImage = thumbnail[0].urlImage || thumbnail[0].dataImage;
 	}
 	return (
 		<div className='row'>
@@ -51,17 +51,17 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 					<img
 						src={dataImage}
 						className='card-img-top'
-						alt={props.cartItem.sach.tenSach}
+						alt={props.cartItem.book.nameBook}
 						style={{ width: "100px" }}
 					/>
 					<div className='d-flex flex-column pb-2'>
-						<Tooltip title={props.cartItem.sach.tenSach} arrow>
+						<Tooltip title={props.cartItem.book.nameBook} arrow>
 							<Link
-								to={`/book/${props.cartItem.sach.maSach}`}
+								to={`/book/${props.cartItem.book.idBook}`}
 								className='d-inline text-black'
 							>
 								<TextEllipsis
-									text={props.cartItem.sach.tenSach + " "}
+									text={props.cartItem.book.nameBook + " "}
 									limit={100}
 								/>
 							</Link>
@@ -69,7 +69,7 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 						<div className='mt-auto'>
 							<span className='discounted-price text-danger'>
 								<strong style={{ fontSize: "22px" }}>
-									{props.cartItem.sach.giaBan.toLocaleString()}đ
+									{props.cartItem.book.sellPrice.toLocaleString()}đ
 								</strong>
 							</span>
 							<span
@@ -77,7 +77,7 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 								style={{ color: "#000" }}
 							>
 								<del>
-									{props.cartItem.sach.giaNiemYet.toLocaleString()}đ
+									{props.cartItem.book.listPrice.toLocaleString()}đ
 								</del>
 							</span>
 						</div>
@@ -85,13 +85,13 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 				</div>
 			</div>
 			<div className='col-2 text-center'>
-				<strong>{props.cartItem.soLuong}</strong>
+				<strong>{props.cartItem.quantity}</strong>
 			</div>
 			<div className='col-2 text-center'>
 				<span className='text-danger'>
 					<strong>
 						{(
-							props.cartItem.soLuong * props.cartItem.sach.giaBan
+							props.cartItem.quantity * props.cartItem.book.sellPrice
 						).toLocaleString()}
 						đ
 					</strong>
@@ -100,7 +100,7 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 			{props.type === "view-customer" &&
 				props.statusOrder === "Thành công" && (
 					<div className='d-flex flex-row-reverse'>
-						{props.cartItem.danhGia === false ? (
+						{props.cartItem.review === false ? (
 							<>
 								<Button
 									variant='outlined'
@@ -136,9 +136,9 @@ export const BookHorizontal: React.FC<BookHorizontalProps> = (props) => {
 							handleOpen={handleOpenModal}
 							handleClose={handleCloseModal}
 						>
-							<DanhGiaForm
+							<ReviewForm
 								idOrder={props.idOrder ? props.idOrder : 0}
-								idBook={props.cartItem.sach.maSach}
+								idBook={props.cartItem.book.idBook}
 								handleCloseModal={handleCloseModal}
 								handleCloseModalOrderDetail={
 									props.handleCloseModalOrderDetail

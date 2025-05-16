@@ -50,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 
     return (
         <nav
-            className='navbar navbar-expand-lg navbar-light bg-light sticky-top'
+            className='navbar navbar-expand-lg navbar-light bg-dark sticky-top text-white'
             style={{ zIndex: 2 }}
         >
             {/* <!-- Container wrapper --> */}
@@ -73,9 +73,9 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                     id='navbarSupportedContent'
                 >
                     {/* <!-- Navbar brand --> */}
-                    <Link className='navbar-brand mt-2 mt-lg-0' to='/'>
+                    <Link className='navbar-brand mt-2 mt-lg-0 ' to='/'>
                         <img
-                            src={"./../../../images/public/logo.svg"}
+                            src={"/images/public/BookStore.png"}
                             width='50'
                             alt='MDB Logo'
                             loading='lazy'
@@ -84,23 +84,23 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                     {/* <!-- Left links --> */}
                     <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
                         <li className='nav-item'>
-                            <NavLink className='nav-link' to='/'>
+                            <NavLink className='nav-link text-white' to='/'>
                                 Trang chủ
                             </NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link' to='/about'>
+                            <NavLink className='nav-link text-white' to='/about'>
                                 Giới thiệu
                             </NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link' to='/search'>
+                            <NavLink className='nav-link text-white' to='/search'>
                                 Kho sách
                             </NavLink>
                         </li>
                         <li className='nav-item dropdown dropdown-hover'>
                             <a
-                                className='nav-link dropdown-toggle'
+                                className='nav-link dropdown-toggle text-white'
                                 href='#'
                                 role='button'
                                 data-bs-toggle='dropdown'
@@ -113,7 +113,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                                     return (
                                         <li key={index}>
                                             <Link
-                                                className='dropdown-item'
+                                                className='dropdown-item text-white'
                                                 to={`/search/${genre.idGenre}`}
                                             >
                                                 {genre.nameGenre}
@@ -124,7 +124,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                             </ul>
                         </li>
                         <li className='nav-item'>
-                            <Link className='nav-link' to={"/policy"}>
+                            <Link className='nav-link text-white' to={"/policy"}>
                                 Chính sách
                             </Link>
                         </li>
@@ -144,10 +144,10 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                     {!isToken() && (
                         <div>
                             <Link to={"/login"}>
-                                <Button>Đăng nhập</Button>
+                                <Button className='text-white'>Đăng nhập</Button>
                             </Link>
                             <Link to={"/register"}>
-                                <Button>Đăng ký</Button>
+                                <Button className='text-white'>Đăng ký</Button>
                             </Link>
                         </div>
                     )}

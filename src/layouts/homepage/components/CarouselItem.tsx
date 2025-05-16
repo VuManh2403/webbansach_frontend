@@ -1,26 +1,26 @@
 import React, {useEffect, useState} from "react";
-import SachModel from "../../../model/SachModel";
-import HinhAnhModel from "../../../model/HinhAnhModel";
-import {lay1AnhCuaMotSach} from "../../../api/HinhAnhAPI";
-import { error } from "console";
+import BookModel from "../../../model/BookModel";
+import ImageModel from "../../../model/ImageModel";
+import {getAllImageByBook} from "../../../api/ImageApi";
+
 
 
 interface CarouselItemInterface{
-    sach: SachModel;
+    book: BookModel;
 }
 
 const CarouselItem: React.FC<CarouselItemInterface> = (props) => {
 
-    const maSach:number = props.sach.maSach;
+    const maSach:number = props.book.idBook;
 
-    const [danhSachAnh, setDanhSachAnh] = useState<HinhAnhModel[]>([]);
+    const [danhSachAnh, setDanhSachAnh] = useState<ImageModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
 
     // lay du lieu
     useEffect(() => {
 
-            lay1AnhCuaMotSach(maSach).then(
+            getAllImageByBook(maSach).then(
                 hinhAnhData =>{
                     setDanhSachAnh(hinhAnhData);
                     setDangTaiDuLieu(false);
@@ -53,8 +53,8 @@ const CarouselItem: React.FC<CarouselItemInterface> = (props) => {
     }
 
     let duLieuAnh:string="";
-    if(danhSachAnh[0] && danhSachAnh[0].duLieuAnh){
-        duLieuAnh=danhSachAnh[0].duLieuAnh;
+    if(danhSachAnh[0] && danhSachAnh[0].urlImage){
+        duLieuAnh=danhSachAnh[0].urlImage;
     }
 
     return (
@@ -63,7 +63,7 @@ const CarouselItem: React.FC<CarouselItemInterface> = (props) => {
                 <img src={duLieuAnh} className="float-end" style={{width:'150px'}} />
             </div>
             <div className="col-7">
-                <h5>{props.sach.tenSach}</h5>
+                <h5>{props.book.nameBook}</h5>
             </div>
         </div>
     );

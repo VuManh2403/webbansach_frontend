@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import SachModel from "../../../model/SachModel";
-import {lay3SachBanChay} from "../../../api/SachAPI";
 import CarouselItem from "./CarouselItem";
+import {get3BestSellerBooks} from "../../../api/BookApi";
+import {useEffect, useState} from "react";
+import BookModel from "../../../model/BookModel";
 
 
 const Carousel: React.FC = () =>  {
 
-    const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
+    const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<BookModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
 
     // lay du lieu
     useEffect(() => {
 
-            lay3SachBanChay().then(
+            get3BestSellerBooks().then(
                 kq =>{
                     setDanhSachQuyenSach(kq);
                     setDangTaiDuLieu(false);
@@ -49,13 +49,13 @@ const Carousel: React.FC = () =>  {
             <div id="carouselExampleDark" className="carousel carousel-dark slide">
                 <div className="carousel-inner">
                     <div className="carousel-item active" data-bs-interval="10000">
-                        <CarouselItem key={0} sach={danhSachQuyenSach[0]}></CarouselItem>
+                        <CarouselItem key={0} book={danhSachQuyenSach[0]}></CarouselItem>
                     </div>
                     <div className="carousel-item " data-bs-interval="10000">
-                        <CarouselItem key={1} sach={danhSachQuyenSach[1]}></CarouselItem>
+                        <CarouselItem key={1} book={danhSachQuyenSach[1]}></CarouselItem>
                     </div>
                     <div className="carousel-item " data-bs-interval="10000">
-                        <CarouselItem key={2} sach={danhSachQuyenSach[2]}></CarouselItem>
+                        <CarouselItem key={2} book={danhSachQuyenSach[2]}></CarouselItem>
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

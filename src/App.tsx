@@ -18,6 +18,16 @@ import GenreManagementPage from "./admin/theloai/GenreManagement";
 import {Slidebar} from "./admin/component/Slidebar";
 import ChinhSach from "./layouts/homepage/ChinhSach";
 import HomePage from "./layouts/homepage/HomePage";
+import BookDetail from "./layouts/product/BookDetail";
+import CheckoutStatus from "./layouts/homepage/CheckoutStatus";
+import ActiveAccount from "./layouts/user/ActiveAccount";
+import {ForgotPassword} from "./layouts/user/ForgotPassword";
+import LoginPage from "./layouts/user/LoginPage";
+import ProfilePage from "./layouts/user/ProfilePage";
+import RegisterPage from "./layouts/user/RegisterPage";
+import FilterPage from "./layouts/homepage/FilterPage";
+import MyFavoriteBooksPage from "./layouts/homepage/MyFavoriteBooksPage";
+import CartPage from "./layouts/homepage/CartPage";
 
 
 const MyRoutes = () => {

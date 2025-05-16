@@ -1,6 +1,9 @@
 import Banner from "./components/Banner";
 import Carousel from "./components/Carousel";
 import useScrollToTop from "../../hooks/ScrollToTop";
+import HotBookList from "../product/HotBookList";
+import NewBookList from "../product/NewBookList";
+import BookList from "../product/BookList";
 
 interface HomePageProps {}
 
