@@ -1,9 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-redeclare */
-/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React from "react";
 import "./SelectQuantity.css";
-import Icon from "@mui/material/Icon";
 import CartItemModel from "../../../../model/CartItemModel";
 import BookModel from "../../../../model/BookModel";
 import { isToken } from "../../../utils/JwtService";
@@ -61,41 +58,36 @@ const SelectQuantity: React.FC<SelectQuantityProps> = (props) => {
 	};
 
 	return (
-		<div
-			className='wrapper-select-quantity d-flex align-items-center rounded'
-			style={{ width: "110px" }}
-		>
+		<div className="d-flex align-items-center border rounded px-2" style={{ width: "110px" }}>
 			<button
-				type='button'
-				className='d-flex align-items-center justify-content-center'
-				onClick={() => props.reduce()}
-				style={{
-					backgroundColor: "transparent",
-					borderColor: "transparent",
-				}}
+				type="button"
+				className="btn btn-sm p-0 d-flex align-items-center justify-content-center"
+				onClick={props.reduce}
+				style={{ width: "30px", background: "transparent", border: "none" }}
 			>
-				<Icon>remove</Icon>
+				<i className="fas fa-minus"></i>
 			</button>
+
 			<input
-				type='number'
-				className='inp-number p-0 m-0'
+				type="number"
+				className="form-control text-center p-0 m-0"
+				style={{ width: "50px", border: "none", boxShadow: "none" }}
 				value={props.quantity}
 				onChange={handleQuantity}
 				min={1}
 				max={props.max}
 			/>
+
 			<button
-				type='button'
-				className='d-flex align-items-center justify-content-center'
-				onClick={() => props.add()}
-				style={{
-					backgroundColor: "transparent",
-					borderColor: "transparent",
-				}}
+				type="button"
+				className="btn btn-sm p-0 d-flex align-items-center justify-content-center"
+				onClick={props.add}
+				style={{ width: "30px", background: "transparent", border: "none" }}
 			>
-				<Icon>add</Icon>
+				<i className="fas fa-plus"></i>
 			</button>
 		</div>
+
 	);
 };
 

@@ -6,7 +6,6 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
-import FeedbackIcon from "@mui/icons-material/Feedback";
 import { logout } from "../../layouts/utils/JwtService";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {useCartItem} from "../../layouts/utils/QuanLyGioHang";
@@ -21,112 +20,93 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 	const navigate = useNavigate();
 	return (
 		<div
-			className='position-fixed bg-primary d-flex flex-column justify-content-between min-vh-100'
-			style={{ zIndex: "100" }}
+			className="position-fixed bg-primary d-flex flex-column justify-content-between min-vh-100"
+			style={{ width: "240px", zIndex: "100" }}
 		>
-			<div className='px-3'>
+			{/* Logo */}
+			<div className="px-3 pt-3">
 				<a
-					className='text-decoration-none d-flex align-items-center text-white d-none d-sm-flex align-items-sm-center justify-content-center'
-					href='#'
+					className="text-decoration-none d-flex justify-content-center align-items-center text-white mb-3"
+					href="#"
 				>
-					<img
-						src='./../../../public/images/public/BookStore.png'
-						alt=''
-						width={100}
-					/>
+					<img src="/images/public/BookStore.png" alt="Logo" width={100} />
 				</a>
-				<hr className='text- white d-none d-sm-block d-md-block' />
-				<ul className='nav nav-pills flex-column' id='parentM'>
-					<li className='nav-item'>
+				<hr className="text-white" />
+
+				{/* Sidebar Nav */}
+				<ul className="nav flex-column">
+					<li className="nav-item mb-3">
 						<NavLink
-							to={"/admin/dashboard"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to="/admin/dashboard"
+							className="nav-link bg-white text-primary fw-bold d-flex align-items-center rounded px-3 py-2"
+
 						>
-							<DashboardIcon fontSize='small' />
-							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Dashboard
-							</span>
+							<DashboardIcon fontSize="small" />
+							<span className="ms-2">DASHBOARD</span>
 						</NavLink>
 					</li>
-					<li className='nav-item'>
+					<li className="nav-item mb-3">
 						<NavLink
-							to={"/admin/book"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to="/admin/book"
+							className="nav-link bg-white text-dark d-flex align-items-center rounded px-3 py-2"
+
 						>
-							<MenuBookRoundedIcon fontSize='small' />
-							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Quản lý Sách
-							</span>
+							<MenuBookRoundedIcon fontSize="small" />
+							<span className="ms-2">QUẢN LÝ SÁCH</span>
 						</NavLink>
 					</li>
-					<li className='nav-item '>
+					<li className="nav-item mb-3">
 						<NavLink
-							to={"/admin/genre"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to="/admin/genre"
+							className="nav-link bg-white text-dark d-flex align-items-center rounded px-3 py-2"
+
 						>
-							<CategoryRoundedIcon fontSize='small' />
-							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Quản lý thể loại
-							</span>
+							<CategoryRoundedIcon fontSize="small" />
+							<span className="ms-2">QUẢN LÝ THỂ LOẠI</span>
 						</NavLink>
 					</li>
-					<li className='nav-item '>
+					<li className="nav-item mb-3">
 						<NavLink
-							to={"/admin/user"}
-							className={`nav-link d-flex align-items-center justify-content-center`}
+							to="/admin/user"
+							className="nav-link bg-white text-dark d-flex align-items-center rounded px-3 py-2"
+
 						>
-							<ManageAccountsIcon fontSize='small' />
-							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Quản lý tài khoản
-							</span>
+							<ManageAccountsIcon fontSize="small" />
+							<span className="ms-2">QUẢN LÝ TÀI KHOẢN</span>
 						</NavLink>
 					</li>
-					<li className='nav-item '>
+					<li className="nav-item mb-3">
 						<NavLink
-							to={"/admin/order"}
-							className={`nav-link d-flex align-items-center justify-content-center `}
+							to="/admin/order"
+							className="nav-link bg-white text-dark d-flex align-items-center rounded px-3 py-2"
+							
 						>
-							<LocalMallRoundedIcon fontSize='small' />
-							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Quản lý đơn hàng
-							</span>
-						</NavLink>
-					</li>
-					<li className='nav-item '>
-						<NavLink
-							to={"/admin/feedback"}
-							className={`nav-link d-flex align-items-center justify-content-center `}
-						>
-							<FeedbackIcon fontSize='small' />
-							<span className='ms-2 d-none d-sm-inline d-md-inline'>
-								Feedback
-							</span>
+							<LocalMallRoundedIcon fontSize="small" />
+							<span className="ms-2">QUẢN LÝ ĐƠN HÀNG</span>
 						</NavLink>
 					</li>
 				</ul>
 			</div>
-			<div className='dropdown open text-center'>
+
+			{/* Dropdown Bottom Admin */}
+			<div className="dropdown text-center mb-4">
 				<a
-					className='my-3 btn border-0 dropdown-toggle text-white d-inline-flex align-items-center justify-content-center'
-					type='button'
-					id='triggerId'
-					data-bs-toggle='dropdown'
-					aria-haspopup='true'
-					aria-expanded='false'
+					className="btn btn-outline-light dropdown-toggle d-inline-flex align-items-center px-3 py-2"
+					type="button"
+					id="triggerId"
+					data-bs-toggle="dropdown"
+					aria-haspopup="true"
+					aria-expanded="false"
 				>
-					<PersonIcon fontSize='small' />
-					<span className='ms-2'>ADMIN</span>
+					<PersonIcon fontSize="small" />
+					<span className="ms-2">ADMIN</span>
 				</a>
-				<div className='dropdown-menu' aria-labelledby='triggerId'>
-					<Link
-						className='dropdown-item'
-						style={{ cursor: "pointer" }}
-						to={"/profile"}
-					>
+				<div className="dropdown-menu" aria-labelledby="triggerId">
+					<Link className="dropdown-item" to="/profile">
 						Thông tin cá nhân
 					</Link>
 					<a
-						className='dropdown-item'
+						className="dropdown-item"
 						style={{ cursor: "pointer" }}
 						onClick={() => {
 							setLoggedIn(false);
@@ -139,5 +119,6 @@ export const Slidebar: React.FC<SlidebarProps> = (props) => {
 				</div>
 			</div>
 		</div>
+
 	);
 };

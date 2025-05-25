@@ -360,26 +360,7 @@ const BookDetail: React.FC<BookDetailProps> = (props) => {
 										</span>
 									</h4>
 								</div>
-								<div className='mt-3'>
-									<p>
-										Vận chuyển tới:{" "}
-										<strong>Quận Bình Thạnh, TP.HCM</strong>{" "}
-										<span
-											className='ms-3 text-primary'
-											style={{ cursor: "pointer" }}
-										>
-											Thay đổi
-										</span>
-									</p>
-									<div className='d-flex align-items-center mt-3'>
-										<img
-											src='https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/d9e992985b18d96aab90969636ebfd0e.png'
-											height='20'
-											alt='free ship'
-										/>
-										<span className='ms-3'>Miễn phí vận chuyển</span>
-									</div>
-								</div>
+
 								<div className='d-flex align-items-center mt-3'>
 									<strong className='me-5'>Số lượng: </strong>
 									<SelectQuantity

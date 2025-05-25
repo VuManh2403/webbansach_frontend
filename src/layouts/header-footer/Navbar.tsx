@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, NavLink, useLocation, useNavigate} from "react-router-dom";
 import GenreModel from "../../model/GenreModel";
-import { getAllGenres } from "../../api/GenreApi";
-import { AdminEnpoint } from "../../admin/AdminEnpoint";
+import {getAllGenres} from "../../api/GenreApi";
+import {AdminEnpoint} from "../../admin/AdminEnpoint";
 import {
     getAvatarByToken,
     getLastNameByToken,
@@ -11,16 +11,18 @@ import {
     isToken,
     logout,
 } from "../utils/JwtService";
-import { Avatar, Button } from "@mui/material";
+import {Avatar, Button} from "@mui/material";
 import {useCartItem} from "../utils/QuanLyGioHang";
 import {useAuth} from "../utils/QuanLyDangNhap";
+
 ;
 
-interface NavbarProps {}
+interface NavbarProps {
+}
 
 const Navbar: React.FC<NavbarProps> = (props) => {
-    const { totalCart, setTotalCart, setCartList } = useCartItem();
-    const { setLoggedIn } = useAuth();
+    const {totalCart, setTotalCart, setCartList} = useCartItem();
+    const {setLoggedIn} = useAuth();
     const navigate = useNavigate();
 
     // Lấy tất cả thể loại
@@ -51,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
     return (
         <nav
             className='navbar navbar-expand-lg navbar-light bg-dark sticky-top text-white'
-            style={{ zIndex: 2 }}
+            style={{zIndex: 2}}
         >
             {/* <!-- Container wrapper --> */}
             <div className='container-fluid'>
@@ -113,7 +115,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                                     return (
                                         <li key={index}>
                                             <Link
-                                                className='dropdown-item text-white'
+                                                className='dropdown-item text-dark'
                                                 to={`/search/${genre.idGenre}`}
                                             >
                                                 {genre.nameGenre}
@@ -155,98 +157,90 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                     {isToken() && (
                         <>
                             {/* <!-- Notifications --> */}
-                            <div className='dropdown'>
-                                <a
-                                    className='text-reset me-3 dropdown-toggle hidden-arrow'
-                                    href='#'
-                                    id='navbarDropdownMenuLink'
-                                    role='button'
-                                    data-mdb-toggle='dropdown'
-                                    aria-expanded='false'
+                            <div className="dropdown">
+                                <button
+                                    className="btn text-reset me-3 hidden-arrow" // Đã bỏ 'dropdown-toggle'
+                                    id="navbarDropdownMenuLink"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    style={{background: "transparent", border: "none"}}
                                 >
-                                    <i className='fas fa-bell'></i>
-                                    <span className='badge rounded-pill badge-notification bg-danger'>
-										1
-									</span>
-                                </a>
+                                    <i className="fas fa-bell"></i>
+                                    <span className="badge rounded-pill badge-notification bg-danger">
+                                        1
+                                    </span>
+                                </button>
+
                                 <ul
-                                    className='dropdown-menu dropdown-menu-end'
-                                    aria-labelledby='navbarDropdownMenuLink'
+                                    className="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="navbarDropdownMenuLink"
                                 >
                                     <li>
-                                        <a className='dropdown-item' href='#'>
+                                        <a className="dropdown-item" href="#">
                                             Some news
                                         </a>
                                     </li>
                                     <li>
-                                        <a className='dropdown-item' href='#'>
+                                        <a className="dropdown-item" href="#">
                                             Another news
                                         </a>
                                     </li>
                                     <li>
-                                        <a className='dropdown-item' href='#'>
+                                        <a className="dropdown-item" href="#">
                                             Something else here
                                         </a>
                                     </li>
                                 </ul>
                             </div>
+
                             {/* <!-- Avatar --> */}
-                            <div className='dropdown'>
-                                <a
-                                    className='dropdown-toggle d-flex align-items-center hidden-arrow'
-                                    href='#'
-                                    id='navbarDropdownMenuAvatar'
-                                    role='button'
-                                    data-mdb-toggle='dropdown'
-                                    aria-expanded='false'
+                            <div className="dropdown">
+                                <button
+                                    className="btn dropdown-toggle d-flex align-items-center"
+                                    id="navbarDropdownMenuAvatar"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    style={{background: "transparent", border: "none"}}
                                 >
                                     <Avatar
-                                        style={{ fontSize: "14px" }}
                                         alt={getLastNameByToken()?.toUpperCase()}
                                         src={getAvatarByToken()}
-                                        sx={{ width: 30, height: 30 }}
+                                        sx={{width: 30, height: 30, fontSize: "14px"}}
                                     />
-                                </a>
-                                <ul
-                                    className='dropdown-menu dropdown-menu-end'
-                                    aria-labelledby='navbarDropdownMenuAvatar'
-                                >
+                                </button>
+
+                                <ul className="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="navbarDropdownMenuAvatar">
                                     <li>
-                                        <Link to={"/profile"} className='dropdown-item'>
+                                        <Link to="/profile" className="dropdown-item">
                                             Thông tin cá nhân
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link
-                                            className='dropdown-item'
-                                            to='/my-favorite-books'
-                                        >
+                                        <Link to="/my-favorite-books" className="dropdown-item">
                                             Sách yêu thích của tôi
                                         </Link>
                                     </li>
                                     {getRoleByToken() === "ADMIN" && (
                                         <li>
-                                            <Link
-                                                className='dropdown-item'
-                                                to='/admin/dashboard'
-                                            >
+                                            <Link to="/admin/dashboard" className="dropdown-item">
                                                 Quản lý
                                             </Link>
                                         </li>
                                     )}
                                     <li>
-                                        <a
-                                            className='dropdown-item'
-                                            style={{ cursor: "pointer" }}
+                                        <button
+                                            className="dropdown-item"
                                             onClick={() => {
                                                 setTotalCart(0);
                                                 logout(navigate);
                                                 setLoggedIn(false);
                                                 setCartList([]);
                                             }}
+                                            style={{cursor: "pointer"}}
                                         >
                                             Đăng xuất
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
