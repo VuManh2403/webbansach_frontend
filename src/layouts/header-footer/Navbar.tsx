@@ -148,9 +148,6 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                             <Link to={"/login"}>
                                 <Button className='text-white'>Đăng nhập</Button>
                             </Link>
-                            <Link to={"/register"}>
-                                <Button className='text-white'>Đăng ký</Button>
-                            </Link>
                         </div>
                     )}
 
