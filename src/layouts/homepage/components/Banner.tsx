@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Banner() {
     return(
@@ -11,7 +12,9 @@ function Banner() {
                     </h3>
                     <p className="">Mary Pope Osborne</p>
                     <div  className="d-flex justify-content-center mt-4">
-                        <button className="btn btn-primary btn-lg text-white float-end">Khám phá sách tại BookStore</button>
+                        <Link to='/search'>
+                            <button className="btn btn-primary btn-lg text-white float-end" >Khám phá sách tại BookStore</button>
+                        </Link>
                     </div>
                 </div>
             </div>
