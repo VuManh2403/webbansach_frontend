@@ -1,4 +1,4 @@
-import { endpointBE } from "../layouts/utils/Constant";
+import { endpointBE } from "../utils/Constant";
 import FeedbackModel from "../model/FeedbackModel";
 import { requestAdmin } from "./Request";
 

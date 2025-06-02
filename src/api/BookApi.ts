@@ -1,4 +1,4 @@
-import { endpointBE } from '../layouts/utils/Constant';
+import { endpointBE } from '../utils/Constant';
 import BookModel from '../model/BookModel'
 import GenreModel from '../model/GenreModel';
 import { getGenreByIdBook } from './GenreApi';
@@ -19,19 +19,26 @@ async function getBook(endpoint: string): Promise<resultInterface> {
    const totalPage: number = response.page.totalPages;
    const size: number = response.page.totalElements;
 
+   // phai lay ra ds sach truoc vi trong be ds sach ko co du lieu anh
+   // lay ra ds sach ms co ds anh trong be
+
    // Lấy ra danh sách quyển sách
-   const bookList: BookModel[] = response._embedded.books.map((bookData: BookModel) => ({
+   // dây là cách lấy mảng dữ liệu sách từ response (thường theo kiểu response từ Spring Data REST)
+   // test api be = postman de lay dung
+   const bookList: BookModel[] = response._embedded.books
+       .map((bookData: BookModel) => ({ // Tạo một mảng mới bookList, mỗi phần tử là một bản sao của BookModel
       ...bookData,
    }))
 
    // Lấy ra ảnh của từng quyển sách
+   // Promise.all đảm bảo tất cả các request ảnh được chạy song song và chờ kết quả đầy đủ
    const bookList1 = await Promise.all(
       bookList.map(async (book: BookModel) => {
          const responseImg = await getAllImageByBook(book.idBook);
          const thumbnail = responseImg.filter(image => image.thumbnail);
          return {
             ...book,
-            thumbnail: thumbnail[0].urlImage,
+            thumbnail: thumbnail[0]?.urlImage || thumbnail[0]?.dataImage,
          };
       })
    );

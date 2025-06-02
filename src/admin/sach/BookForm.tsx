@@ -8,9 +8,9 @@ import { LoadingButton } from "@mui/lab";
 import BookModel from "../../model/BookModel";
 import {getBookByIdAllInformation} from "../../api/BookApi";
 import {getAllGenres} from "../../api/GenreApi";
-import {endpointBE} from "../../layouts/utils/Constant";
+import {endpointBE} from "../../utils/Constant";
 import GenreModel from "../../model/GenreModel";
-import {SelectMultiple} from "../../layouts/utils/SelectMultiple";
+import {SelectMultiple} from "../../utils/SelectMultiple";
 
 interface BookFormProps {
 	id: number;
@@ -77,7 +77,7 @@ export const BookForm: React.FC<BookFormProps> = (props) => {
 
 	// Khúc này để lưu danh sách thể loại của sách
 	useEffect(() => {
-		setBook({ ...book, idGenres: genresListSelected });
+		setBook(prev => ({ ...prev, idGenres: genresListSelected }));
 	}, [genresListSelected]);
 
 	async function hanleSubmit(event: FormEvent<HTMLFormElement>) {

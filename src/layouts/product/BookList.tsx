@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Skeleton} from "@mui/material";
 import BookProps from "./components/BookProps";
-import Pagination from "../utils/Pagination";
+import Pagination from "../../utils/Pagination";
 
 interface BookListProps {
 	paginable?: boolean;

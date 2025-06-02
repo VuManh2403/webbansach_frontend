@@ -1,9 +1,9 @@
 import { Button, TextField, Typography } from "@mui/material";
 import React, { FormEvent, useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
-import { endpointBE } from "../../../utils/Constant";
+import { endpointBE } from "../../../../utils/Constant";
 import { toast } from "react-toastify";
-import { getIdUserByToken } from "../../../utils/JwtService";
+import { getIdUserByToken } from "../../../../utils/JwtService";
 import CartItemModel from "../../../../model/CartItemModel";
 
 interface ReviewFormProps {
@@ -71,6 +71,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 	}
 
 	// Lấy data review khi đã review rồi
+
 	useEffect(() => {
 		if (props.cartItem?.review) {
 			const token = localStorage.getItem("token");
@@ -93,6 +94,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 				})
 				.catch((error) => console.log(error));
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

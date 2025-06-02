@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CheckoutSuccess } from "./components/CheckoutSuccess";
 import { CheckoutFail } from "./components/CheckoutFail";
-import { endpointBE } from "../utils/Constant";
-import { getIdUserByToken } from "../utils/JwtService";
-import {useAuth} from "../utils/QuanLyDangNhap";
+import { endpointBE } from "../../utils/Constant";
+import { getIdUserByToken } from "../../utils/JwtService";
+import {useAuth} from "../../utils/QuanLyDangNhap";
 
 const CheckoutStatus: React.FC = () => {
 	const { isLoggedIn } = useAuth();

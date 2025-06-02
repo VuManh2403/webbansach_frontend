@@ -1,4 +1,4 @@
-import { endpointBE } from "../layouts/utils/Constant";
+import { endpointBE } from "../utils/Constant";
 import GenreModel from "../model/GenreModel";
 import { request } from "./Request";
 

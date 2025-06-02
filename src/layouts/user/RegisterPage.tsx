@@ -9,11 +9,11 @@ import {
 	checkPassword,
 	checkPhoneNumber,
 	checkRepeatPassword,
-} from "../utils/Validation";
+} from "../../utils/Validation";
 import { toast } from "react-toastify";
-import { endpointBE } from "../utils/Constant";
+import { endpointBE } from "../../utils/Constant";
 import useScrollToTop from "../../hooks/ScrollToTop";
-import {useAuth} from "../utils/QuanLyDangNhap";
+import {useAuth} from "../../utils/QuanLyDangNhap";
 
 const RegisterPage: React.FC = () => {
 	useScrollToTop(); // Mỗi lần vào component này thì sẽ ở trên cùng

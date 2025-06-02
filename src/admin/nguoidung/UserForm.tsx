@@ -17,9 +17,9 @@ import UserModel from "../../model/UserModel";
 import RoleModel from "../../model/RoleModel";
 import { getAllRoles } from "../../api/RoleApi";
 import {get1User} from "../../api/UserApi";
-import {getUsernameByToken} from "../../layouts/utils/JwtService";
-import {endpointBE} from "../../layouts/utils/Constant";
-import {checkExistEmail, checkExistUsername, checkPassword, checkPhoneNumber} from "../../layouts/utils/Validation";
+import {getUsernameByToken} from "../../utils/JwtService";
+import {endpointBE} from "../../utils/Constant";
+import {checkExistEmail, checkExistUsername, checkPassword, checkPhoneNumber} from "../../utils/Validation";
 
 
 interface UserFormProps {

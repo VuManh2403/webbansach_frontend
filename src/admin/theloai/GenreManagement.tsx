@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import {FadeModal} from "../../layouts/utils/FadeModal";
+import {FadeModal} from "../../utils/FadeModal";
 import { GenreForm } from "./GenreForm";
 import {GenreTable} from "./GenreTable";
 import RequireAdmin from "../RequireAdmin";

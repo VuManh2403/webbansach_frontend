@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import { useConfirm } from "material-ui-confirm";
 import GenreModel from "../../model/GenreModel";
 import {getAllGenres} from "../../api/GenreApi";
-import {endpointBE} from "../../layouts/utils/Constant";
-import { DataTable } from "../../layouts/utils/DataTable";
+import {endpointBE} from "../../utils/Constant";
+import { DataTable } from "../../utils/DataTable";
 
 interface GenreTableProps {
 	setOption: any;

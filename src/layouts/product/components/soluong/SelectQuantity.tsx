@@ -3,8 +3,8 @@ import React from "react";
 import "./SelectQuantity.css";
 import CartItemModel from "../../../../model/CartItemModel";
 import BookModel from "../../../../model/BookModel";
-import { isToken } from "../../../utils/JwtService";
-import { endpointBE } from "../../../utils/Constant";
+import { isToken } from "../../../../utils/JwtService";
+import { endpointBE } from "../../../../utils/Constant";
 
 interface SelectQuantityProps {
 	max: number | undefined;

@@ -31,7 +31,7 @@ const CarouselItem: React.FC<CarouselItemInterface> = (props) => {
                     setBaoLoi(error.message);
                 }
             );
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         },[] // chi goi 1 lan neu ko co luc nao cx truy van du lieu
     )
 
@@ -60,7 +60,7 @@ const CarouselItem: React.FC<CarouselItemInterface> = (props) => {
     return (
         <div className="row align-items-center">
             <div className="col-5 text-center">
-                <img src={duLieuAnh} className="float-end" style={{width:'150px'}} />
+                <img src={duLieuAnh} className="float-end" style={{width:'150px'}} alt=""/>
             </div>
             <div className="col-7">
                 <h5>{props.book.nameBook}</h5>

@@ -12,9 +12,9 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import UserModel from "../../model/UserModel";
 import {useConfirm} from "material-ui-confirm";
-import {endpointBE} from "../../layouts/utils/Constant";
+import {endpointBE} from "../../utils/Constant";
 import {getAllUserRole} from "../../api/UserApi";
-import {DataTable} from "../../layouts/utils/DataTable";
+import {DataTable} from "../../utils/DataTable";
 
 
 interface UserTableProps {

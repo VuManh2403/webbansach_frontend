@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import {UserTable} from "./UserTable";
-import {FadeModal} from "../../layouts/utils/FadeModal";
+import {FadeModal} from "../../utils/FadeModal";
 import {UserForm} from "./UserForm";
 import RequireAdmin from "../RequireAdmin";
 

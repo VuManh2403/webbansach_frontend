@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {OrderTable} from "./OrderTable";
-import {FadeModal} from "../../layouts/utils/FadeModal";
+import {FadeModal} from "../../utils/FadeModal";
 import {OrderForm} from "./OrderForm";
 import RequireAdmin from "../RequireAdmin";
 

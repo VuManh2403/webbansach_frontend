@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import CartItemModel from "../../model/CartItemModel";
+import CartItemModel from "../model/CartItemModel";
 
 interface CartItemProps {
     children: React.ReactNode;

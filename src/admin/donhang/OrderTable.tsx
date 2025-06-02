@@ -11,7 +11,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import OrderModel from "../../model/OrderModel";
 import {getAllOrders} from "../../api/OrderApi";
-import {DataTable} from "../../layouts/utils/DataTable";
+import {DataTable} from "../../utils/DataTable";
 
 
 interface OrderTableProps {

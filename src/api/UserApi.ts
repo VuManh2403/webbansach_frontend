@@ -1,4 +1,4 @@
-import { endpointBE } from "../layouts/utils/Constant";
+import { endpointBE } from "../utils/Constant";
 import UserModel from "../model/UserModel";
 import { request, requestAdmin } from "./Request";
 import { getRoleByIdUser } from "./RoleApi";

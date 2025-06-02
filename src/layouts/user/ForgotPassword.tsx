@@ -1,10 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import React, { FormEvent, useEffect, useState } from "react";
-import { endpointBE } from "../utils/Constant";
+import { endpointBE } from "../../utils/Constant";
 import { toast } from "react-toastify";
 import useScrollToTop from "../../hooks/ScrollToTop";
 import { useNavigate } from "react-router-dom";
-import {useAuth} from "../utils/QuanLyDangNhap";
+import {useAuth} from "../../utils/QuanLyDangNhap";
 
 export const ForgotPassword: React.FC = () => {
 	useScrollToTop(); // Mỗi lần vào component này thì sẽ ở trên cùng

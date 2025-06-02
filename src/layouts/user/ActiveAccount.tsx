@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { endpointBE } from "../utils/Constant";
+import { endpointBE } from "../../utils/Constant";
 import useScrollToTop from "../../hooks/ScrollToTop";
 import { Button } from "@mui/material";
-import {useAuth} from "../utils/QuanLyDangNhap";
+import {useAuth} from "../../utils/QuanLyDangNhap";
 
 const ActiveAccount: React.FC = () => {
 	useScrollToTop(); // Mỗi lần vào component này thì sẽ ở trên cùng

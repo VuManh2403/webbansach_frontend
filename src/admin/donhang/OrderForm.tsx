@@ -11,7 +11,7 @@ import {
 import { toast } from "react-toastify";
 import OrderModel from "../../model/OrderModel";
 import { get1Orders } from "../../api/OrderApi";
-import { endpointBE } from "../../layouts/utils/Constant";
+import { endpointBE } from "../../utils/Constant";
 import { OrderDetail } from "../../layouts/product/components/chitietdonhang/OrderDetail";
 
 interface OrderFormProps {

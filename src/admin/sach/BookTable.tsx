@@ -9,8 +9,8 @@ import { useConfirm } from "material-ui-confirm";
 import BookModel from "../../model/BookModel";
 import {getAllBook} from "../../api/BookApi";
 import {getAllImageByBook} from "../../api/ImageApi";
-import {endpointBE} from "../../layouts/utils/Constant";
-import {DataTable} from "../../layouts/utils/DataTable";
+import {endpointBE} from "../../utils/Constant";
+import {DataTable} from "../../utils/DataTable";
 
 interface BookTableProps {
 	setOption: any;

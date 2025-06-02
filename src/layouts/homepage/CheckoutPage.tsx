@@ -10,14 +10,14 @@ import React, { FormEvent, useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CartItemModel from "../../model/CartItemModel";
 import { get1User } from "../../api/UserApi";
-import { getIdUserByToken } from "../utils/JwtService";
+import { getIdUserByToken } from "../../utils/JwtService";
 import UserModel from "../../model/UserModel";
-import { checkPhoneNumber } from "../utils/Validation";
+import { checkPhoneNumber } from "../../utils/Validation";
 import { toast } from "react-toastify";
-import { endpointBE } from "../utils/Constant";
+import { endpointBE } from "../../utils/Constant";
 import { CheckoutSuccess } from "./components/CheckoutSuccess";
 import useScrollToTop from "../../hooks/ScrollToTop";
-import {useCartItem} from "../utils/QuanLyGioHang";
+import {useCartItem} from "../../utils/QuanLyGioHang";
 import {BookHorizontal} from "../product/components/BookHorizontalProps";
 
 interface CheckoutPageProps {

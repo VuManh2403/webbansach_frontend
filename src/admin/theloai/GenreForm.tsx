@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GenreModel from "../../model/GenreModel";
 import {get1Genre} from "../../api/GenreApi";
-import {isTokenExpired} from "../../layouts/utils/JwtService";
-import {endpointBE} from "../../layouts/utils/Constant";
+import {isTokenExpired} from "../../utils/JwtService";
+import {endpointBE} from "../../utils/Constant";
 
 interface GenreFormProps {
 	option: string;

@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
-import { JwtPayload } from "../../admin/RequireAdmin";
+import { JwtPayload } from "../admin/RequireAdmin";
+
 export function isTokenExpired(token: string) {
     const decodedToken = jwtDecode(token);
 

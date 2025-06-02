@@ -17,23 +17,22 @@ import {
 	checkPassword,
 	checkPhoneNumber,
 	checkRepeatPassword,
-} from "../utils/Validation";
+} from "../../utils/Validation";
 import Tooltip from "@mui/material/Tooltip";
-import { FadeModal } from "../utils/FadeModal";
+import { FadeModal } from "../../utils/FadeModal";
 import { get1User } from "../../api/UserApi";
-import { getIdUserByToken } from "../utils/JwtService";
+import { getIdUserByToken } from "../../utils/JwtService";
 import UserModel from "../../model/UserModel";
-import { endpointBE } from "../utils/Constant";
+import { endpointBE } from "../../utils/Constant";
 import { toast } from "react-toastify";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
 import useScrollToTop from "../../hooks/ScrollToTop";
 import { OrderForm } from "../../admin/donhang/OrderForm";
-import {useAuth} from "../utils/QuanLyDangNhap";
-import HiddenInputUpload from "../utils/HiddenInputUpload";
+import {useAuth} from "../../utils/QuanLyDangNhap";
+import HiddenInputUpload from "../../utils/HiddenInputUpload";
 import OrderTable from "./components/OrderTable";
-import Grid from '@mui/material/Grid';
 
 
 interface ProfilePageProps {

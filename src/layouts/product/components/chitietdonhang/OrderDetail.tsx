@@ -1,7 +1,7 @@
 import React from "react";
 import OrderModel from "../../../../model/OrderModel";
 import { Chip } from "@mui/material";
-import { StepperComponent } from "../../../utils/StepperComponent";
+import { StepperComponent } from "../../../../utils/StepperComponent";
 import { BookHorizontal } from "../BookHorizontalProps";
 import { format } from "date-fns";
 interface OrderDetailProps {

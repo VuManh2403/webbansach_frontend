@@ -1,4 +1,4 @@
-import { endpointBE } from "../layouts/utils/Constant";
+import { endpointBE } from "../utils/Constant";
 import CartItemModel from "../model/CartItemModel";
 import OrderModel from "../model/OrderModel";
 import { request } from "./Request";

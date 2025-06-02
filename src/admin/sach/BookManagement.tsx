@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import {BookTable} from "./BookTable";
-import {FadeModal} from "../../layouts/utils/FadeModal";
+import {FadeModal} from "../../utils/FadeModal";
 import {BookForm} from "./BookForm";
 import RequireAdmin from "../RequireAdmin";
 

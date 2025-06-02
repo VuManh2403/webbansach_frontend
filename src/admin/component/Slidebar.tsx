@@ -6,10 +6,10 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
-import { logout } from "../../layouts/utils/JwtService";
+import { logout } from "../../utils/JwtService";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import {useCartItem} from "../../layouts/utils/QuanLyGioHang";
-import {useAuth} from "../../layouts/utils/QuanLyDangNhap";
+import {useCartItem} from "../../utils/QuanLyGioHang";
+import {useAuth} from "../../utils/QuanLyDangNhap";
 
 
 interface SlidebarProps {}

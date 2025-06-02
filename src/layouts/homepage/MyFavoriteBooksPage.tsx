@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useScrollToTop from "../../hooks/ScrollToTop";
-import {useAuth} from "../utils/QuanLyDangNhap";
+import {useAuth} from "../../utils/QuanLyDangNhap";
 import FavoriteBooksList from "../product/FavoriteBooksList";
 
 interface MyFavoriteBooksPageProps {}

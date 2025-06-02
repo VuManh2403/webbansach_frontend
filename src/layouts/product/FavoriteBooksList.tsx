@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { endpointBE } from "../utils/Constant";
-import { getIdUserByToken } from "../utils/JwtService";
+import { endpointBE } from "../../utils/Constant";
+import { getIdUserByToken } from "../../utils/JwtService";
 import BookModel from "../../model/BookModel";
 import BookProps from "./components/BookProps";
 import { getBookById } from "../../api/BookApi";

@@ -6,21 +6,22 @@ import Tooltip from "@mui/material/Tooltip";
 import { toast } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
-import { endpointBE } from "../../utils/Constant";
-import { getIdUserByToken, isToken } from "../../utils/JwtService";
+import { endpointBE } from "../../../utils/Constant";
+import { getIdUserByToken, isToken } from "../../../utils/JwtService";
 import TextEllipsis from "./ngatvanbanbangdau3cham/TextEllipsis";
-import {useCartItem} from "../../utils/QuanLyGioHang";
+import {useCartItem} from "../../../utils/QuanLyGioHang";
 
-interface BookProps {
+interface Result {
 	book: BookModel;
 }
 
-const BookProps: React.FC<BookProps> = ({ book }) => {
+const BookProps: React.FC<Result> = ({ book }) => {
 	const { setTotalCart, cartList } = useCartItem();
 	const [isFavoriteBook, setIsFavoriteBook] = useState(false);
 	const navigation = useNavigate();
 
 	// Lấy tất cả sách yêu thích của người dùng đã đăng nhập ra
+
 	useEffect(() => {
 		if (isToken()) {
 			fetch(
@@ -37,6 +38,7 @@ const BookProps: React.FC<BookProps> = ({ book }) => {
 					console.log(error);
 				});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Xử lý thêm sản phẩm vào giỏ hàng

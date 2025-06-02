@@ -8,10 +8,10 @@ import {
 } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
-import { DataTable } from "../../utils/DataTable";
+import { DataTable } from "../../../utils/DataTable";
 import { getAllOrdersByIdUser } from "../../../api/OrderApi";
 import OrderModel from "../../../model/OrderModel";
-import { getIdUserByToken } from "../../utils/JwtService";
+import { getIdUserByToken } from "../../../utils/JwtService";
 
 interface OrderTableProps {
 	keyCountReload: any;

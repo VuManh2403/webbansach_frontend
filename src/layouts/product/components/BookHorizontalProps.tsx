@@ -6,7 +6,7 @@ import { getAllImageByBook } from "../../../api/ImageApi";
 import { Button, Chip } from "@mui/material";
 import RateReviewRoundedIcon from "@mui/icons-material/RateReviewRounded";
 import DoneIcon from "@mui/icons-material/Done";
-import { FadeModal } from "../../utils/FadeModal";
+import { FadeModal } from "../../../utils/FadeModal";
 import { Link } from "react-router-dom";
 import TextEllipsis from "./ngatvanbanbangdau3cham/TextEllipsis";
 import {ReviewForm} from "./danhgia/ReviewForm";
