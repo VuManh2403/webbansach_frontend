@@ -44,7 +44,7 @@ const ChinhSach: React.FC = () => {
 			</ul>
 			<p>
 				Trong trường hợp hiếm hoi sản phẩm quý khách nhận được có khiếm
-				khuyết, hư hỏng hoặc không như mô tả, ZoiBook cam kết bảo vệ khách
+				khuyết, hư hỏng hoặc không như mô tả, BookStore cam kết bảo vệ khách
 				hàng bằng chính sách đổi trả/ hoàn tiền trên tinh thần bảo vệ quyền
 				lợi người tiêu dùng nhằm cam kết với quý khách về chất lượng sản
 				phẩm và dịch vụ của chúng tôi.
@@ -211,7 +211,7 @@ const ChinhSach: React.FC = () => {
 			<p>&nbsp;</p>
 			<ul>
 				<li>
-					<p>Quý khách vui lòng thông báo về cho ZoiBook ngay khi:</p>
+					<p>Quý khách vui lòng thông báo về cho BookStore ngay khi:</p>
 					<p>
 						{" "}
 						+ Kiện hàng giao tới ngoại quan bên ngoài có dấu hiệu hư hại ,
@@ -226,11 +226,11 @@ const ChinhSach: React.FC = () => {
 				</li>
 				<li>
 					<p>
-						Sau khi ZoiBook xác nhận mail tiếp nhận yêu cầu kiểm tra xử
-						lý, ZoiBook sẽ liên hệ đến quý khách để xác nhận thông tin
+						Sau khi BookStore xác nhận mail tiếp nhận yêu cầu kiểm tra xử
+						lý, BookStore sẽ liên hệ đến quý khách để xác nhận thông tin
 						hoặc nhờ bổ sung thông tin (nếu có). Trường hợp không liên hệ
-						được ZoiBook rất tiếc xin được phép từ chối xử lý yêu cầu.
-						Thời gian ZoiBook liên hệ trong giờ hành chính tối đa 3 lần
+						được BookStore rất tiếc xin được phép từ chối xử lý yêu cầu.
+						Thời gian BookStore liên hệ trong giờ hành chính tối đa 3 lần
 						trong vòng 7 ngày sau khi nhận thông tin yêu cầu.
 					</p>
 				</li>
@@ -276,7 +276,7 @@ const ChinhSach: React.FC = () => {
 			</p>
 			<p>
 				Quý khách&nbsp;có thể trả lại sản phẩm đã mua tại&nbsp;
-				<strong>ZoiBook</strong> trong vòng 30 ngày kể từ khi nhận hàng với
+				<strong>BookStore</strong> trong vòng 30 ngày kể từ khi nhận hàng với
 				đa số sản phẩm khi thỏa mãn các điều kiện sau:
 			</p>
 			<ul>
@@ -302,7 +302,7 @@ const ChinhSach: React.FC = () => {
 			<strong>3. Điều kiện đổi trả</strong>
 			<br />
 			<p>
-				<strong>ZoiBook</strong> hỗ trợ đổi/ trả sản phẩm cho quý khách nếu:
+				<strong>BookStore</strong> hỗ trợ đổi/ trả sản phẩm cho quý khách nếu:
 			</p>
 			<ul>
 				<li>
@@ -326,7 +326,7 @@ const ChinhSach: React.FC = () => {
 					<p>
 						Quý khách vui lòng thông tin đơn hàng cần hỗ trợ đổi trả theo
 						Hotline 1900636467 hoặc email về địa chỉ:{" "}
-						<strong>cskh@zoiBook.com.vn</strong> với tiêu đề{" "}
+						<strong>cskh@BookStore.com.vn</strong> với tiêu đề{" "}
 						<strong>“Đổi Trả Đơn Hàng " Mã đơn hàng".</strong>
 					</p>
 				</li>
@@ -363,11 +363,11 @@ const ChinhSach: React.FC = () => {
 			</p>
 			<ul>
 				<li>
-					Để đảm bảo quyền lợi khách hàng và để <strong>ZoiBook</strong> có
+					Để đảm bảo quyền lợi khách hàng và để <strong>BookStore</strong> có
 					cơ sở làm việc với các bộ phận liên quan, tất cả yêu cầu đổi/
 					trả/ bảo hành quý khách cần cung cấp hình ảnh/ clip sản phẩm lỗi.
 					Quá thời gian đổi/ trả sản phẩm nếu chưa nhận được đủ hình ảnh/
-					clip từ quý khách, <strong>ZoiBook</strong> xin phép từ chối hỗ
+					clip từ quý khách, <strong>BookStore</strong> xin phép từ chối hỗ
 					trợ.
 				</li>
 			</ul>
@@ -407,9 +407,9 @@ const ChinhSach: React.FC = () => {
 							</p>
 						</td>
 						<td>
-							<p>ZoiBook có sản phẩm→ đổi mới cùng sản phẩm</p>
+							<p>BookStore có sản phẩm→ đổi mới cùng sản phẩm</p>
 							<p>
-								ZoiBook hết hàng→ Hoàn tiền hoặc quý khách có thể chọn
+								BookStore hết hàng→ Hoàn tiền hoặc quý khách có thể chọn
 								mặt hàng khác tại website{" "}
 								<span style={{ textDecoration: "underline" }}>
 									<Link to='/'>www.BookStore</Link>
@@ -447,7 +447,7 @@ const ChinhSach: React.FC = () => {
 								quý khách hàng.
 							</p>
 							<p>
-								**Lưu ý: ZoiBook rất tiếc sẽ không hỗ trợ hoàn lại chi
+								**Lưu ý: BookStore rất tiếc sẽ không hỗ trợ hoàn lại chi
 								phí vận chuyển trong đơn hàng cho trường hợp này.
 							</p>
 							<p>Đổi /trả không thu phí</p>
